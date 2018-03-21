@@ -1,0 +1,913 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="react-native,redux,编程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Kaelinda" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="React Native 集成 Redux课程介绍
+Flux/reFlux/Redux
+简单/单一状态树
+react 和 redux 数据流的关系
+JS、CSS、HTML
+JSX
+webpack 构建
+
+数据流
+MVC 状态复杂之后，action会触发事件 并且不可预测
+flux: state Tree will send data to view,but view can’t send data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reactnative 快速集成 Redux">
+<meta property="og:url" content="http://kaelblog.website/2017/08/11/reactnative-快速集成-Redux/index.html">
+<meta property="og:site_name" content="Kaelinda">
+<meta property="og:description" content="React Native 集成 Redux课程介绍
+Flux/reFlux/Redux
+简单/单一状态树
+react 和 redux 数据流的关系
+JS、CSS、HTML
+JSX
+webpack 构建
+
+数据流
+MVC 状态复杂之后，action会触发事件 并且不可预测
+flux: state Tree will send data to view,but view can’t send data">
+<meta property="og:updated_time" content="2017-08-11T08:10:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="reactnative 快速集成 Redux">
+<meta name="twitter:description" content="React Native 集成 Redux课程介绍
+Flux/reFlux/Redux
+简单/单一状态树
+react 和 redux 数据流的关系
+JS、CSS、HTML
+JSX
+webpack 构建
+
+数据流
+MVC 状态复杂之后，action会触发事件 并且不可预测
+flux: state Tree will send data to view,but view can’t send data">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":null},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'kael'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kaelblog.website/2017/08/11/reactnative-快速集成-Redux/"/>
+
+
+
+
+
+  <title>reactnative 快速集成 Redux | Kaelinda</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kaelinda</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">hexo_subtitle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kaelblog.website/2017/08/11/reactnative-快速集成-Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kael">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fift1efkwyj30dw0dwglv.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kaelinda">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">reactnative 快速集成 Redux</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T14:36:53+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="React-Native-集成-Redux"><a href="#React-Native-集成-Redux" class="headerlink" title="React Native 集成 Redux"></a>React Native 集成 Redux</h1><h2 id="课程介绍"><a href="#课程介绍" class="headerlink" title="课程介绍"></a>课程介绍</h2><ul>
+<li>Flux/reFlux/Redux</li>
+<li>简单/单一状态树</li>
+<li>react 和 redux 数据流的关系</li>
+<li>JS、CSS、HTML</li>
+<li>JSX</li>
+<li>webpack 构建</li>
+</ul>
+<h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><ul>
+<li>MVC 状态复杂之后，action会触发事件 并且不可预测</li>
+<li>flux: state Tree will send data to view,but view can’t send data to state-tree.</li>
+<li>Redux :  state 是包含在store中的</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install react</div><div class="line">npm install redux react-redux --save</div></pre></td></tr></table></figure>
+<h2 id="快速开始（速成版本）："><a href="#快速开始（速成版本）：" class="headerlink" title="快速开始（速成版本）："></a>快速开始（速成版本）：</h2><h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><ul>
+<li><code>action</code> : React行为/变化的描述 是一个对象</li>
+<li><code>dispatch</code> : 派发用户行为的一个方法 <code>store</code>的一个属性</li>
+<li><code>reducer</code> : 接收<code>action</code>,并进行简单的拼接，其内部是<code>纯函数</code>（到底什么是纯函数请移步百度 ： <a href="https://www.baidu.com/s?wd=%E7%BA%AF%E5%87%BD%E6%95%B0" target="_blank" rel="external">传送门</a> 、 <a href="http://blog.csdn.net/hongweigg/article/details/44035283" target="_blank" rel="external">速达传送门</a>）</li>
+<li><code>store</code> :存储数据的地方</li>
+</ul>
+<h3 id="Get-start"><a href="#Get-start" class="headerlink" title="Get start:"></a>Get start:</h3><ul>
+<li><p>step1 : <strong>安装依赖</strong> </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install redux react-redux --save</div></pre></td></tr></table></figure>
+</li>
+<li><p>step2 : 创建一个 AppProvider.js 并导出AppProvider组件 ：  <strong>AppProvider 作为APP的入口组件</strong></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export default AppProvider;</div></pre></td></tr></table></figure>
+</li>
+<li><p>step3 : AppProvider.js 中导入头文件    </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import &#123; Provider &#125; from &apos;react-redux&apos;;    </div><div class="line">import &#123; createStore &#125; from &apos;redux&apos;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>step4 : 准备AppProvider的包装数据：</p>
+<ul>
+<li><p>创建全局的store用于存储状态,并绑定<strong>reducer</strong></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const store = createStore(AppReducer)</div></pre></td></tr></table></figure>
+</li>
+<li><p>包装APPProvider：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const AppProvider = () =&gt; &#123;</div><div class="line">    return (</div><div class="line">      //KR-1 包裹一层Provider   之后进入被包裹控件内部 进行关联处理</div><div class="line">        &lt;Provider store=&#123;store&#125;&gt;</div><div class="line">            &lt;RootStack /&gt;</div><div class="line">        &lt;/Provider&gt;</div><div class="line">    )</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>index.ios.js 文件中注册下 AppProvider对象</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">AppRegistry.registerComponent(&apos;XinLiFM&apos;, () =&gt; AppProvider);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>step5 : <strong>数据绑定</strong> 找到打算有 数据流传递 的对象 AppFind</p>
+<ul>
+<li><p>导入头文件：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import &#123; connect &#125; from &apos;react-redux&apos;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>绑定数据：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//用来获取更新后的数据   监听数据更新</div><div class="line">const mapStateToProps = (state,ownProps) =&gt; &#123;</div><div class="line">    console.log(state);</div><div class="line">    return &#123;</div><div class="line">        testShow: state.find.testShow,</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//用来派发消息</div><div class="line">const mapDispatchToProps = (dispatch,ownProps) =&gt; (&#123;</div><div class="line">  changeTabBar: (...args) =&gt; dispatch(showTabBar(...args)),</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//用来进行数据流  和  控件的绑定关系</div><div class="line">export default connect(mapStateToProps,mapDispatchToProps)(AppFind)</div></pre></td></tr></table></figure>
+</li>
+<li><p>派发消息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.props.changeTabBar(!this.props.testShow)</div></pre></td></tr></table></figure>
+</li>
+<li><p>消息处理：step4 中绑定的reducer文件中:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">//1.导入头文件</div><div class="line">import &#123; combineReducers &#125; from &apos;redux&apos;;</div><div class="line">//2.创建初始化状态</div><div class="line">const initialState = &#123; testShow: true&#125;;</div><div class="line">//3.逻辑处理</div><div class="line">const find = (state = initialState, action) =&gt; &#123;</div><div class="line">      switch (action.type) &#123;</div><div class="line">          case &apos;findshowTabBar&apos;:&#123;</div><div class="line">		    return Object.assign(&#123;&#125;, state, &#123;</div><div class="line">			   testShow: action.testShow</div><div class="line">			&#125;)</div><div class="line">		&#125;</div><div class="line">	   default:</div><div class="line">		return state;</div><div class="line">  &#125;</div><div class="line">  &#125;</div><div class="line">  //4.组合所有的逻辑块</div><div class="line">  const AppReducer = combineReducers(&#123;</div><div class="line">      find, </div><div class="line">      //如果业务繁多这里可能还有别的模块</div><div class="line">  &#125;);</div><div class="line">  //5.导出</div><div class="line">  export default AppReducer;</div></pre></td></tr></table></figure>
+</li>
+<li><p>获取更改状态值：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//因为上一步的绑定数据  就是将state的状态值 绑定到AppFind的props上，</div><div class="line">//所以取值的时候直接从this。props中取即可</div><div class="line">var &#123;testShow,isShowTab,showTabBar&#125; = this.props;</div><div class="line">&lt;Text </div><div class="line">    style=&#123;&#123;fontSize:17,color:testShow?&quot;red&quot;:&apos;rgb(39, 249, 110)&apos;&#125;&#125;&gt;</div><div class="line">    &#123;testShow?&quot;我要显示某个东西&quot;:&quot;我要隐藏某个东西&quot;&#125;</div><div class="line">&lt;/Text&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>总结：<br>其实这里最重要的就三步：1. 包装   2、数据绑定 3、数据处理</p>
+</blockquote>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="1-action"><a href="#1-action" class="headerlink" title="1. action"></a>1. action</h3><p>信息的携带者。<br><strong>派发消息的几种方式：</strong></p>
+<ul>
+<li>直接发送：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">dispatch(&#123;type:&apos;action_name&apos;,index:2&#125;);</div><div class="line"></div><div class="line">const myAction = &#123;</div><div class="line">  type:&apos;action_name&apos;,</div><div class="line">  index: 1,</div><div class="line">&#125;</div><div class="line">dispatch(myAction);</div></pre></td></tr></table></figure>
+<ul>
+<li>通过Action的创建函数发送：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//我们可以把所有的Action封装到一个固定文件 就想CSS文件那样 头文件导入的方式 去引用</div><div class="line">const actionFunc = (text) =&gt; &#123;</div><div class="line">  return &#123;</div><div class="line">    type: &apos;action_name&apos;,</div><div class="line">    index: 2,</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//派发消息时候 直接引用创建函数的返回结果即可</div><div class="line">dispatch(actionFunc(&apos;test&apos;));</div></pre></td></tr></table></figure>
+<ul>
+<li>绑定的Action创建函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//基本action创建函数</div><div class="line">const actionFunc = (text) =&gt; &#123;</div><div class="line">  return &#123;</div><div class="line">    type: &apos;action_name&apos;,</div><div class="line">    index: 2,</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">//绑定派发方法</div><div class="line">const boundAction = (test) =&gt; &#123;</div><div class="line">  dispatch(actionFunc(test));</div><div class="line">&#125;</div><div class="line"></div><div class="line">//使用绑定好的派发函数</div><div class="line">boundAction(&apos;test&apos;);</div></pre></td></tr></table></figure>
+<h3 id="2-reducer"><a href="#2-reducer" class="headerlink" title="2. reducer"></a>2. reducer</h3><p>纯函数；</p>
+<ul>
+<li><p>方法结构</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(previouseState,action) =&gt; newState</div></pre></td></tr></table></figure>
+<p>  给一个旧的state 和一个action 生成 一个新的 state。</p>
+</li>
+<li><p>基本方法</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">const initialState = &#123; testShow: true&#125;;</div><div class="line"></div><div class="line">const home = (state = initialState, action) =&gt; &#123;</div><div class="line">  switch (action.type) &#123;</div><div class="line">    case &apos;homeshowTabBar&apos;:&#123;</div><div class="line"></div><div class="line">      console.log(&quot;homeshowTabBar：%s&quot;,action.testShow);</div><div class="line">        </div><div class="line">    //合并状态值</div><div class="line">      return Object.assign(&#123;&#125;, state, &#123;</div><div class="line">        testShow: action.testShow;</div><div class="line">      &#125;)</div><div class="line">    &#125;</div><div class="line">    default:</div><div class="line">    return state;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>合并state的时候下面的方法也是能达到相同效果的</p>
+</blockquote>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;...state, ...newState&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>拆分合并reducer</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">const home = (state = initialState, action) =&gt; &#123;</div><div class="line">    switch (action.type) &#123;</div><div class="line">        case &apos;homeshowTabBar&apos;:&#123;</div><div class="line">            console.log(&quot;homeshowTabBar：%s&quot;,action.testShow);</div><div class="line">            return Object.assign(&#123;&#125;, state, &#123;</div><div class="line">                testShow: action.testShow</div><div class="line">            &#125;)</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">        return state;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const find = (state = initialState, action) =&gt; &#123;</div><div class="line">    switch (action.type) &#123;</div><div class="line">        case &apos;findshowTabBar&apos;:&#123;</div><div class="line">            return Object.assign(&#123;&#125;, state, &#123;</div><div class="line">            testShow: action.testShow</div><div class="line">            &#125;)</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">        return state;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">    </div><div class="line">//合并</div><div class="line">const AppReducer = combineReducers(&#123;</div><div class="line">    nav,</div><div class="line">    home,</div><div class="line">    find,</div><div class="line">&#125;);</div><div class="line">export default AppReducer</div></pre></td></tr></table></figure>
+<p>  <strong>注意上面的写法和下面完全等价!!!</strong>：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">const AppReducer = (state=&#123;&#125;, action) =&gt; &#123;</div><div class="line">    return &#123;</div><div class="line">        home: home(state.home,action),</div><div class="line">        find: find(sate.find,action),</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>减少代码量 自动定义 reducerCreator</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">export const testCreator = myCreatorForReducer([], &#123;</div><div class="line"> [ActionTypes.ADD_TODO](state, action) &#123;</div><div class="line"> let text = action.text.trim();</div><div class="line"> return [...state, text];</div><div class="line"> &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">const myCreatorForReducer = (initialState,handles) =&gt; &#123;</div><div class="line"></div><div class="line">    return (state=initialState,action) =&gt; &#123;</div><div class="line">        return handles[action.type](state,action);</div><div class="line">    &#125;else &#123;</div><div class="line">     return state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  设置不同的Key、调用不同的方法:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">const reducer = combineReducers(&#123;</div><div class="line">    a: doSomethingWithA,</div><div class="line">    b: processB,</div><div class="line">    c: c</div><div class="line">&#125;)</div><div class="line">    </div><div class="line">function reducer(state = &#123;&#125;, action) &#123;</div><div class="line">    return &#123;</div><div class="line">        a: doSomethingWithA(state.a, action),</div><div class="line">        b: processB(state.b, action),</div><div class="line">        c: c(state.c, action)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-store"><a href="#3-store" class="headerlink" title="3. store"></a>3. store</h3><ul>
+<li>维持应用的 <code>state</code>；</li>
+<li>提供 <code>getState()</code> 方法获取 <code>state</code>；</li>
+<li>提供 <code>dispatch(action)</code> 方法更新 <code>state</code>；</li>
+<li>通过 <code>subscribe(listener)</code> 注册监听器;</li>
+<li>通过 <code>subscribe(listener)</code> 返回的函数注销监听器。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore &#125; from &apos;redux&apos;</div><div class="line">import todoApp from &apos;./reducers&apos;</div><div class="line">let store = createStore(todoApp)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>后续会更新的…………….</p>
+</blockquote>
+<h2 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h2><h3 id="异步action"><a href="#异步action" class="headerlink" title="异步action"></a>异步action</h3><h3 id="异步数据流"><a href="#异步数据流" class="headerlink" title="异步数据流"></a>异步数据流</h3><h3 id="Middleware-中间件"><a href="#Middleware-中间件" class="headerlink" title="Middleware 中间件"></a>Middleware 中间件</h3><h3 id="搭配-React-Router"><a href="#搭配-React-Router" class="headerlink" title="搭配 React Router"></a>搭配 React Router</h3><h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2>
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcod.jpg" alt="Kael wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
+          
+            <a href="/tags/redux/" rel="tag"># redux</a>
+          
+            <a href="/tags/编程/" rel="tag"># 编程</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/04/Git入门/" rel="next" title="Git入门">
+                <i class="fa fa-chevron-left"></i> Git入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/01/rect-navigation-Android-headerTitle-居中适配方案/" rel="prev" title="rect-navigation Android headerTitle 居中适配方案">
+                rect-navigation Android headerTitle 居中适配方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://ws3.sinaimg.cn/large/006tNc79ly1fift1efkwyj30dw0dwglv.jpg"
+               alt="Kael" />
+          <p class="site-author-name" itemprop="name">Kael</p>
+           
+              <p class="site-description motion-element" itemprop="description">我命由我不由天~</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kaelzzs" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/u/f26ccbda4e66" title="简书" target="_blank">简书</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://my.yizhihongxing.com/aff.php?aff=7598" title="VPN购买(一枝红杏)" target="_blank">VPN购买(一枝红杏)</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-Native-集成-Redux"><span class="nav-number">1.</span> <span class="nav-text">React Native 集成 Redux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程介绍"><span class="nav-number">1.1.</span> <span class="nav-text">课程介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据流"><span class="nav-number">1.2.</span> <span class="nav-text">数据流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速开始（速成版本）："><span class="nav-number">1.4.</span> <span class="nav-text">快速开始（速成版本）：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心概念"><span class="nav-number">1.4.1.</span> <span class="nav-text">核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-start"><span class="nav-number">1.4.2.</span> <span class="nav-text">Get start:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶"><span class="nav-number">1.5.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-action"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-reducer"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. reducer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-store"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. store</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">1.6.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步action"><span class="nav-number">1.6.1.</span> <span class="nav-text">异步action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步数据流"><span class="nav-number">1.6.2.</span> <span class="nav-text">异步数据流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Middleware-中间件"><span class="nav-number">1.6.3.</span> <span class="nav-text">Middleware 中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭配-React-Router"><span class="nav-number">1.6.4.</span> <span class="nav-text">搭配 React Router</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技巧"><span class="nav-number">1.7.</span> <span class="nav-text">技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">1.8.</span> <span class="nav-text">API</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kael</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

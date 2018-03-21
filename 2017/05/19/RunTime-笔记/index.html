@@ -1,0 +1,890 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="OC,runtime," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Kaelinda" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="RunTime-笔记
+名词解释Class-Definition Data Structures
+class : 定义数据类型 – Class-Definition Data Structures.
+Method : 类中定义的方法的不透明类型 – An opaque type that represents an Objective-C class.
+Ivar : 实例变量的 不透明类型 – An">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunTime-笔记">
+<meta property="og:url" content="http://kaelblog.website/2017/05/19/RunTime-笔记/index.html">
+<meta property="og:site_name" content="Kaelinda">
+<meta property="og:description" content="RunTime-笔记
+名词解释Class-Definition Data Structures
+class : 定义数据类型 – Class-Definition Data Structures.
+Method : 类中定义的方法的不透明类型 – An opaque type that represents an Objective-C class.
+Ivar : 实例变量的 不透明类型 – An">
+<meta property="og:updated_time" content="2017-05-19T10:32:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunTime-笔记">
+<meta name="twitter:description" content="RunTime-笔记
+名词解释Class-Definition Data Structures
+class : 定义数据类型 – Class-Definition Data Structures.
+Method : 类中定义的方法的不透明类型 – An opaque type that represents an Objective-C class.
+Ivar : 实例变量的 不透明类型 – An">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":null},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'kael'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kaelblog.website/2017/05/19/RunTime-笔记/"/>
+
+
+
+
+
+  <title>RunTime-笔记 | Kaelinda</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kaelinda</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">hexo_subtitle</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kaelblog.website/2017/05/19/RunTime-笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kael">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fift1efkwyj30dw0dwglv.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kaelinda">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RunTime-笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T14:55:34+08:00">
+                2017-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="RunTime-笔记"><a href="#RunTime-笔记" class="headerlink" title="RunTime-笔记"></a>RunTime-笔记</h1><hr>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="Class-Definition-Data-Structures"><a href="#Class-Definition-Data-Structures" class="headerlink" title="Class-Definition Data Structures"></a>Class-Definition Data Structures</h3><ul>
+<li><code>class</code> : 定义数据类型 – Class-Definition Data Structures.</li>
+<li><code>Method</code> : 类中定义的方法的<code>不透明类型</code> – An opaque type that represents an Objective-C class.</li>
+<li><code>Ivar</code> : 实例变量的 <code>不透明类型</code> – An opaque type that represents a method in a class definition.</li>
+<li><code>Category</code> : 类别 – An opaque type that represents an instance variable.</li>
+<li><code>objc_property_t</code> : 表示OC中声明的属性的 <code>不透明类型</code> – An opaque type that represents a category.</li>
+<li><code>IMP</code> : 指向方法的实现的指针 – An opaque type that represents an Objective-C declared property.</li>
+<li><code>SEL</code> : 方法选择器的不透明类型 – A pointer to the start of a method implementation.</li>
+<li><code>objc_method_description</code> :  方法的不透明类型 – Defines an opaque type that represents a method selector.</li>
+<li><code>objc_method_listDeprecated</code> :  定义了Objective-C 的方法 – Defines an Objective-C method.</li>
+<li><code>objc_cache</code> : 方法声明的list;主要是缓存了父类等的方法； – Contains an array of method definitions.</li>
+<li><code>objc_protocol_list</code> : 协议列表 – Represents a list of formal protocols.</li>
+<li><code>objc_property_attribute_t</code> : property的属性描述。– Defines a property attribute. </li>
+<li><code>id</code> : 一个指向某各类的实例对象的指针 – A pointer to an instance of a class.</li>
+<li><code>objc_object</code> :某各类的实例对象 – Represents an instance of a class.</li>
+<li><code>objc_super</code> :某个对象的父类(超类) – Specifies the superclass of an instance.</li>
+<li><code>BOOL</code> : 布尔类型</li>
+<li><code>objc_AssociationPolicy</code> : 联想类型的类型指定 – Type to specify the behavior of an association.</li>
+</ul>
+<h3 id="Consstans"><a href="#Consstans" class="headerlink" title="Consstans"></a>Consstans</h3><ul>
+<li><code>Boolean Values</code> : 布尔值  –  These macros define convenient constants to represent Boolean values.</li>
+<li><code>Null Value</code> : 类或者实例对象为空的  宏定义 – These macros define null values for classes and instances.</li>
+<li><code>Dispatch Function Prototypes</code> : 此宏指示是否必须将调度函数转换为适当的函数指针类型。– This macro indicates whether dispatch functions must be cast to an appropriate function pointer type.</li>
+<li><code>Objective-C Root Class</code> : This macro annotates a class as being an Objective-C root class.</li>
+<li><code>Local Variable Storage Duration</code> :  This macro indicates that the values stored in certain local variables should not be aggressively released by the compiler during optimization.</li>
+<li><code>Associative Object Behaviors</code> : Policies related to associative references.</li>
+</ul>
+<h3 id="粗暴理解"><a href="#粗暴理解" class="headerlink" title="粗暴理解"></a>粗暴理解</h3><hr>
+<p><a href="http://www.jianshu.com/p/f900de4a1495" target="_blank" rel="external">Runtime粗暴理解-传送门</a></p>
+<blockquote>
+<p><code>实例对象</code>(instance)只存放<code>isa</code>指针和<code>实例变量</code>，由isa指针找到所属<code>class</code>，<code>class</code>维护一个运行时可接收的<code>方法列表</code>；<code>方法列表</code>中的每个入口是一个<code>方法</code>(Method)，其中key是一个特定名称，即<code>选择器</code>(SEL)，其对应一个指向底层C<code>实现函数的指针</code>，即实现(IMP)，。运行时机制最关键核心是objc_msgSend函数，通过给<code>target</code>（类）发送<code>selecter</code>（SEL）来传递消息，找到匹配的<code>IMP</code>，指向实现的C函数。</p>
+</blockquote>
+<h4 id="类的本质"><a href="#类的本质" class="headerlink" title="类的本质"></a>类的本质</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">struct objc_class &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line"></div><div class="line">#if !__OBJC2__</div><div class="line">    Class super_class                       OBJC2_UNAVAILABLE;  // 父类</div><div class="line"></div><div class="line">    const char *name                        OBJC2_UNAVAILABLE;  // 类名</div><div class="line">    long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0</div><div class="line">    long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识</div><div class="line"></div><div class="line">    long instance_size                      OBJC2_UNAVAILABLE;  // 类的实例变量大小</div><div class="line">    struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 类的成员变量链表</div><div class="line"></div><div class="line">    struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法定义的链表</div><div class="line">    struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存</div><div class="line"></div><div class="line">    struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议链表</div><div class="line">#endif</div><div class="line"></div><div class="line">&#125; OBJC2_UNAVAILABLE;</div></pre></td></tr></table></figure>
+<p>id类型的结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct objc_object &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">typedef struct objc_object *id;</div></pre></td></tr></table></figure></p>
+<p>Ivar结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_ivar *Ivar;</div><div class="line"></div><div class="line">struct objc_ivar &#123;</div><div class="line">    char *ivar_name                 OBJC2_UNAVAILABLE;  // 变量名</div><div class="line">    char *ivar_type                 OBJC2_UNAVAILABLE;  // 变量类型</div><div class="line">    int ivar_offset                 OBJC2_UNAVAILABLE;  // 基地址偏移字节</div><div class="line">#ifdef __LP64__</div><div class="line">    int space                       OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>objc_property_t:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_property *objc_property_t;</div></pre></td></tr></table></figure></p>
+<p>objc_property_attribute_t:（属性的特性有：返回值、是否为atomic、getter/setter名字、是否为dynamic、背后使用的ivar名字、是否为弱引用等）；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">（属性的特性有：返回值、是否为atomic、getter/setter名字、是否为dynamic、背后使用的ivar名字、是否为弱引用等）；</div></pre></td></tr></table></figure></p>
+<p>SEL:可以看做Method的ID：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_selector *SEL;</div></pre></td></tr></table></figure></p>
+<p>IMP:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedefine id (*IMP)(id, SEL, ...)</div></pre></td></tr></table></figure></p>
+<p>objc_method_list:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">struct objc_method_list &#123;</div><div class="line">    struct objc_method_list *obsolete                        OBJC2_UNAVAILABLE;</div><div class="line">    int method_count                                                 OBJC2_UNAVAILABLE;</div><div class="line">#ifdef __LP64__</div><div class="line">    int space                                                              OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line">    /* variable length structure */</div><div class="line">    struct objc_method method_list[1]                        OBJC2_UNAVAILABLE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>cache:<br><em>方法调用最先是在方法缓存里找的，方法调用是懒调用，第一次调用时加载后加到缓存池里。一个objc程序启动后，需要进行类的初始化、调用方法时的cache初始化，再发送消息的时候就直接走缓存（引申：+load方法和+initialize方法。load方法是首次加载类时调用，绝对只调用一次；initialize方法是首次给类发消息时调用，通常只调用一次，但如果它的子类初始化时未定义initialize方法，则会再调用一次它的initialize方法）。</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">struct objc_cache &#123;</div><div class="line">    // 缓存bucket的总数</div><div class="line">    unsigned int mask /* total = mask + 1 */                 OBJC2_UNAVAILABLE;</div><div class="line"></div><div class="line">    // 实际缓存bucket的总数</div><div class="line">    unsigned int occupied                                    OBJC2_UNAVAILABLE;</div><div class="line">    // 指向Method数据结构指针的数组</div><div class="line">    Method buckets[1]                                        OBJC2_UNAVAILABLE;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>Protocol:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_object Protocol;</div></pre></td></tr></table></figure></p>
+<p>category:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_category *Category;</div><div class="line"></div><div class="line">struct objc_category &#123;</div><div class="line">    char *category_name                          OBJC2_UNAVAILABLE; // 分类名</div><div class="line">    char *class_name                             OBJC2_UNAVAILABLE; // 分类所属的类名</div><div class="line">    struct objc_method_list *instance_methods    OBJC2_UNAVAILABLE; // 实例方法列表</div><div class="line">    struct objc_method_list *class_methods       OBJC2_UNAVAILABLE; // 类方法列表</div><div class="line">    struct objc_protocol_list *protocols         OBJC2_UNAVAILABLE; // 分类所实现的协议列表</div><div class="line">&#125;  </div><div class="line"></div><div class="line">// objc-runtime-new.h中定义：</div><div class="line">struct category_t &#123;</div><div class="line">    const char *name;                        // name 是指 class_name 而不是 category_name</div><div class="line">    classref_t cls;                          // cls是要扩展的类对象，编译期间是不会定义的，而是在Runtime阶段通过name对应到对应的类对象</div><div class="line">    struct method_list_t *instanceMethods;       </div><div class="line">    struct method_list_t *classMethods;</div><div class="line">    struct protocol_list_t *protocols;</div><div class="line">    struct property_list_t *instanceProperties;    // instanceProperties表示Category里所有的properties，(这就是我们可以通过objc_setAssociatedObject和objc_getAssociatedObject增加实例变量的原因，)不过这个和一般的实例变量是不一样的</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="文档API结构"><a href="#文档API结构" class="headerlink" title="文档API结构"></a>文档API结构</h3><h4 id="Class-Definition"><a href="#Class-Definition" class="headerlink" title="Class-Definition"></a>Class-Definition</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">- 类相关：</div><div class="line">          + 数据类型：class，object；</div><div class="line">                   - isa 元类</div><div class="line">                   - superClass 根类</div><div class="line">          + 操作函数:</div><div class="line">                    - class_：</div><div class="line">                              + get: 类名，父类; 实例变量，成员变量；属性；实例方法，类方法，方法实现；</div><div class="line">                              + copy: 成员变量列表；属性列表；方法列表；协议列表；</div><div class="line">                              + add: 成员变量；属性；方法；协议；</div><div class="line">                              + replace：属性；方法；</div><div class="line">                              + respond:响应方法判断（内省）</div><div class="line">                              + isMetaclass:元类判断（内省）</div><div class="line">                              + conform:遵循协议判断（内省）</div><div class="line">                    - objc_：</div><div class="line">                              + get: 实例变量；成员变量；类名；类；元类；关联对象；</div><div class="line">                              + copy: 对象；类；类列表；协议列表；</div><div class="line">                              + set: 实例变量；成员变量；类；类列表；协议；关联对象；</div><div class="line">                              + dispose: 对象；</div><div class="line">                    - 动态创建/销毁类、对象</div><div class="line">  - 成员变量、属性相关：</div><div class="line">          + 数据类型：Ivar；objc_property_t；objc_property_attribute_t；</div><div class="line">          + 操作函数：</div><div class="line">                     - ivar_：</div><div class="line">                     - property_：</div><div class="line">  - 方法消息相关：</div><div class="line">          + 数据类型：SEL；IMP; Method；方法缓存</div><div class="line">          + 操作函数: </div><div class="line">                     - method_：</div><div class="line">                              + invoke: 方法实现的返回值；</div><div class="line">                              + get: 方法名；方法实现；参数与返回值相关；</div><div class="line">                              + set：方法实现；</div><div class="line">                              + exchange：交换方法实现</div><div class="line">          + 方法调用：msgSend函数（找到方法实现）</div><div class="line">          + 消息转发：</div><div class="line">                    - Method Resolution</div><div class="line">                    - Fast Forwarding</div><div class="line">                    - Normal Forwarding</div><div class="line">  - 协议相关：</div><div class="line">          + 数据类型：Protocol；</div><div class="line">          + 操作函数：</div><div class="line">                     - protocol_：</div><div class="line">                              + get: 协议；属性；</div><div class="line">                              + copy：协议列表；属性列表；</div><div class="line">                              + add：属性；方法；协议；</div><div class="line">                              + isEqual：判断两协议等同；</div><div class="line">                              + comform：判断是否遵循协议；</div><div class="line">  - 其他：类名；版本号；类信息；（忽略）</div></pre></td></tr></table></figure>
+<h4 id="Class-API"><a href="#Class-API" class="headerlink" title="Class API"></a>Class API</h4><h5 id="class"><a href="#class" class="headerlink" title="class"></a>class</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// 获取类的类名</div><div class="line">const char * class_getName ( Class cls );</div><div class="line">// 获取类的父类</div><div class="line">Class class_getSuperclass ( Class cls );</div><div class="line"></div><div class="line">// 获取实例大小</div><div class="line">size_t class_getInstanceSize ( Class cls );</div><div class="line">// 获取类中指定名称实例成员变量的信息</div><div class="line">Ivar class_getInstanceVariable ( Class cls, const char *name );</div><div class="line">// 获取类成员变量的信息</div><div class="line">Ivar class_getClassVariable ( Class cls, const char *name );</div><div class="line">// 获取指定的属性</div><div class="line">objc_property_t class_getProperty ( Class cls, const char *name );</div><div class="line"></div><div class="line">// 获取实例方法</div><div class="line">Method class_getInstanceMethod ( Class cls, SEL name );</div><div class="line">// 获取类方法</div><div class="line">Method class_getClassMethod ( Class cls, SEL name );</div><div class="line">// 获取方法的具体实现</div><div class="line">IMP class_getMethodImplementation ( Class cls, SEL name );</div><div class="line">IMP class_getMethodImplementation_stret ( Class cls, SEL name );</div></pre></td></tr></table></figure>
+<h5 id="copy-成员变量列表-ivarList-；属性列表-propertyList-；方法列表-methodList-；协议列表-protocolList-；"><a href="#copy-成员变量列表-ivarList-；属性列表-propertyList-；方法列表-methodList-；协议列表-protocolList-；" class="headerlink" title="copy :成员变量列表(ivarList)；属性列表(propertyList)；方法列表(methodList)；协议列表(protocolList)；"></a>copy :成员变量列表(ivarList)；属性列表(propertyList)；方法列表(methodList)；协议列表(protocolList)；</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 获取整个成员变量列表</div><div class="line">Ivar * class_copyIvarList ( Class cls, unsigned int *outCount );</div><div class="line">// 获取属性列表</div><div class="line">objc_property_t * class_copyPropertyList ( Class cls, unsigned int *outCount );</div><div class="line">// 获取所有方法的列表</div><div class="line">Method * class_copyMethodList ( Class cls, unsigned int *outCount );</div><div class="line">// 获取类实现的协议列表</div><div class="line">Protocol * class_copyProtocolList ( Class cls, unsigned int *outCount );</div></pre></td></tr></table></figure>
+<h5 id="add-成员变量（Ivar）；属性-Property-；方法-Method-；协议-Protocol-；"><a href="#add-成员变量（Ivar）；属性-Property-；方法-Method-；协议-Protocol-；" class="headerlink" title="add : 成员变量（Ivar）；属性(Property)；方法(Method)；协议(Protocol)；"></a>add : 成员变量（Ivar）；属性(Property)；方法(Method)；协议(Protocol)；</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 添加成员变量</div><div class="line">BOOL class_addIvar ( Class cls, const char *name, size_t size, uint8_t alignment, const char *types );</div><div class="line">// 添加属性</div><div class="line">BOOL class_addProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount );</div><div class="line">// 添加方法</div><div class="line">BOOL class_addMethod ( Class cls, SEL name, IMP imp, const char *types );</div><div class="line">// 添加协议</div><div class="line">BOOL class_addProtocol ( Class cls, Protocol *protocol );</div></pre></td></tr></table></figure>
+<h5 id="replace-属性（Property）；方法（Method）；"><a href="#replace-属性（Property）；方法（Method）；" class="headerlink" title="replace : 属性（Property）；方法（Method）；"></a>replace : 属性（Property）；方法（Method）；</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 替换类的属性</div><div class="line">void class_replaceProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount );</div><div class="line">// 替代方法的实现</div><div class="line">IMP class_replaceMethod ( Class cls, SEL name, IMP imp, const char *types );</div></pre></td></tr></table></figure>
+<h5 id="respond-相应方法判断"><a href="#respond-相应方法判断" class="headerlink" title="respond : 相应方法判断"></a>respond : 相应方法判断</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 类实例是否响应指定的selector</div><div class="line">BOOL class_respondsToSelector ( Class cls, SEL sel );</div></pre></td></tr></table></figure>
+<h5 id="isMetaClass-元类判断（内省）"><a href="#isMetaClass-元类判断（内省）" class="headerlink" title="isMetaClass : 元类判断（内省）"></a>isMetaClass : 元类判断（内省）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 判断给定的Class是否是一个元类</div><div class="line">BOOL class_isMetaClass ( Class cls );</div></pre></td></tr></table></figure>
+<h5 id="conform-遵循协议判断（内省）"><a href="#conform-遵循协议判断（内省）" class="headerlink" title="conform:遵循协议判断（内省）"></a>conform:遵循协议判断（内省）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 返回类是否实现指定的协议</div><div class="line">BOOL class_conformsToProtocol ( Class cls, Protocol *protocol );</div></pre></td></tr></table></figure>
+<h5 id="objc"><a href="#objc" class="headerlink" title="objc_ :"></a>objc_ :</h5><p>get:实例变量(instance)；成员变量；类名(className)；类(class)；元类(metaClass)；关联对象(AssociationObject)；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 获取对象实例变量</div><div class="line">Ivar object_getInstanceVariable ( id obj, const char *name, void **outValue );</div><div class="line">// 获取对象中实例变量的值</div><div class="line">id object_getIvar ( id obj, Ivar ivar );</div><div class="line">// 获取对象的类名</div><div class="line">const char * object_getClassName ( id obj );</div><div class="line">// 获取对象的类</div><div class="line">Class object_getClass ( id obj );</div><div class="line">Class objc_getClass ( const char *name );</div><div class="line">// 返回指定类的元类</div><div class="line">Class objc_getMetaClass ( const char *name );</div><div class="line">//获取关联对象</div><div class="line">id objc_getAssociatedObject(self, &amp;myKey);</div></pre></td></tr></table></figure></p>
+<p>copy：对象；类；类列表；协议列表；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 获取指定对象的一份拷贝</div><div class="line">id object_copy ( id obj, size_t size );</div><div class="line">// 创建并返回一个指向所有已注册类的指针列表</div><div class="line">Class * objc_copyClassList ( unsigned int *outCount );</div></pre></td></tr></table></figure>
+<p> set: 实例变量；类；类列表；协议；关联对象；</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 设置类实例的实例变量的值</div><div class="line">Ivar object_setInstanceVariable ( id obj, const char *name, void *value );</div><div class="line">// 设置对象中实例变量的值</div><div class="line">void object_setIvar ( id obj, Ivar ivar, id value );</div><div class="line">//设置关联对象</div><div class="line">void objc_setAssociatedObject(self, &amp;myKey, anObject, OBJC_ASSOCIATION_RETAIN);</div></pre></td></tr></table></figure>
+<p>dispose: 对象；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 释放指定对象占用的内存</div><div class="line">id object_dispose ( id obj );</div></pre></td></tr></table></figure></p>
+<h5 id="动态创建-销毁类、对象"><a href="#动态创建-销毁类、对象" class="headerlink" title="动态创建/销毁类、对象"></a>动态创建/销毁类、对象</h5><p>动态创建/销毁类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 释放指定对象占用的内存</div><div class="line">id object_dispose ( id obj );</div></pre></td></tr></table></figure></p>
+<p>动态创建/销毁对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 创建类实例</div><div class="line">id class_createInstance ( Class cls, size_t extraBytes );</div><div class="line"></div><div class="line">// 在指定位置创建类实例</div><div class="line">id objc_constructInstance ( Class cls, void *bytes );</div><div class="line"></div><div class="line">// 销毁类实例</div><div class="line">void * objc_destructInstance ( id obj );</div></pre></td></tr></table></figure></p>
+<h5 id="ivar"><a href="#ivar" class="headerlink" title="ivar_"></a>ivar_</h5><p> get:<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 获取成员变量名</div><div class="line">const char * ivar_getName ( Ivar v );</div><div class="line"></div><div class="line">// 获取成员变量类型编码</div><div class="line">const char * ivar_getTypeEncoding ( Ivar v );</div><div class="line"></div><div class="line">// 获取成员变量的偏移量</div><div class="line">ptrdiff_t ivar_getOffset ( Ivar v );</div></pre></td></tr></table></figure></p>
+<h5 id="property"><a href="#property" class="headerlink" title="property_:"></a>property_:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 获取属性名</div><div class="line">const char * property_getName ( objc_property_t property );</div><div class="line"></div><div class="line">// 获取属性特性描述字符串</div><div class="line">const char * property_getAttributes ( objc_property_t property );</div><div class="line"></div><div class="line">// 获取属性中指定的特性</div><div class="line">char * property_copyAttributeValue ( objc_property_t property, const char *attributeName );</div><div class="line"></div><div class="line">// 获取属性的特性列表</div><div class="line">objc_property_attribute_t * property_copyAttributeList ( objc_property_t property, unsigned int *outCount );</div></pre></td></tr></table></figure>
+<h5 id="IMP"><a href="#IMP" class="headerlink" title="IMP:"></a>IMP:</h5><p><em>IMP是指向实现函数的指针，通过SEL取得IMP后，我们就获得了最终要找的实现函数的入口。</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedefine id (*IMP)(id, SEL, ...)</div></pre></td></tr></table></figure></p>
+<h5 id="Method"><a href="#Method" class="headerlink" title="Method:"></a>Method:</h5><p><em>这个结构体相当于在SEL和IMP之间作了一个绑定。这样有了SEL，我们便可以找到对应的IMP，从而调用方法的实现代码。（在运行时才将SEL和IMP绑定, 动态配置方法）</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_method *Method;</div><div class="line"></div><div class="line">struct objc_method &#123;</div><div class="line">    SEL method_name                 OBJC2_UNAVAILABLE;  // 方法名</div><div class="line">    char *method_types                  OBJC2_UNAVAILABLE; // 参数类型</div><div class="line">    IMP method_imp                      OBJC2_UNAVAILABLE;  // 方法实现</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>objc_method_list</code> 就是用来存储当前类的方法链表，objc_method存储了类的某个方法的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">struct objc_method_list &#123;</div><div class="line">    struct objc_method_list *obsolete                        OBJC2_UNAVAILABLE;</div><div class="line">    int method_count                                                 OBJC2_UNAVAILABLE;</div><div class="line">#ifdef __LP64__</div><div class="line">    int space                                                              OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line">    /* variable length structure */</div><div class="line">    struct objc_method method_list[1]                        OBJC2_UNAVAILABLE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="method"><a href="#method" class="headerlink" title="method_:"></a>method_:</h5><p>invoke:方法实现的返回值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 调用指定方法的实现</div><div class="line">id method_invoke ( id receiver, Method m, ... );</div><div class="line"></div><div class="line">// 调用返回一个数据结构的方法的实现</div><div class="line">void method_invoke_stret ( id receiver, Method m, ... );</div></pre></td></tr></table></figure></p>
+<p>get:方法名；方法实现；参数与返回值相关；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 获取方法名</div><div class="line">SEL method_getName ( Method m );</div><div class="line"></div><div class="line">// 返回方法的实现</div><div class="line">IMP method_getImplementation ( Method m );</div><div class="line">// 获取描述方法参数和返回值类型的字符串</div><div class="line">const char * method_getTypeEncoding ( Method m );</div><div class="line">// 返回方法的参数的个数</div><div class="line">unsigned int method_getNumberOfArguments ( Method m );</div><div class="line">// 通过引用返回方法指定位置参数的类型字符串</div><div class="line">void method_getArgumentType ( Method m, unsigned int index, char *dst, size_t dst_len );</div></pre></td></tr></table></figure></p>
+<p>copy:返回值类型；参数类型；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 获取方法的返回值类型的字符串</div><div class="line">char * method_copyReturnType ( Method m );</div><div class="line"></div><div class="line">// 获取方法的指定位置参数的类型字符串</div><div class="line">char * method_copyArgumentType ( Method m, unsigned int index );</div><div class="line"></div><div class="line">// 通过引用返回方法的返回值类型字符串</div><div class="line">void method_getReturnType ( Method m, char *dst, size_t dst_len );</div></pre></td></tr></table></figure></p>
+<p>set:方法实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 设置方法的实现</div><div class="line">IMP method_setImplementation ( Method m, IMP imp );</div></pre></td></tr></table></figure></p>
+<p>exchange：交换方法实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 设置方法的实现</div><div class="line">IMP method_setImplementation ( Method m, IMP imp );</div></pre></td></tr></table></figure></p>
+<p>description:方法描述<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 返回指定方法的方法描述结构体</div><div class="line">struct objc_method_description * method_getDescription ( Method m );</div></pre></td></tr></table></figure></p>
+<p>sel_<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 返回给定选择器指定的方法的名称</div><div class="line">const char * sel_getName ( SEL sel );</div><div class="line"></div><div class="line">// 在Objective-C Runtime系统中注册一个方法，将方法名映射到一个选择器，并返回这个选择器</div><div class="line">SEL sel_registerName ( const char *str );</div><div class="line"></div><div class="line">// 在Objective-C Runtime系统中注册一个方法</div><div class="line">SEL sel_getUid ( const char *str );</div><div class="line"></div><div class="line">// 比较两个选择器</div><div class="line">BOOL sel_isEqual ( SEL lhs, SEL rhs );</div></pre></td></tr></table></figure></p>
+<p>向对象发送消息，实际上是调用objc_msgSend函数，obj_msgSend的实际动作就是：找到这个函数指针，然后调用它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id objc_msgSend(receiver self, selector _cmd, arg1, arg2, ...)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>self和_cmd是隐藏参数，在编译期被插入实现代码。<br>self：指向消息的接受者target的对象类型，作为一个占位参数，消息传递成功后self将指向消息的receiver。<br>_cmd: 指向方法实现的SEL类型。<br>当向一般对象发送消息时，调用objc_msgSend；当向super发送消息时，调用的是objc_msgSendSuper； 如果返回值是一个结构体，则会调用objc_msgSend_stret或objc_msgSendSuper_stret。</p>
+<p>0.1-检查target是否为nil。如果为nil，直接cleanup，然后return。(这就是我们可以向nil发送消息的原因。)<br>如果方法返回值是一个对象，那么发送给nil的消息将返回nil；如果方法返回值为指针类型，其指针大小为小于或者等于sizeof(void<em>)，float，double，long double 或者long long的整型标量，发送给nil的消息将返回0；如果方法返回值为结构体,发送给nil的消息将返回0。结构体中各个字段的值将都是0；如果方法的返回值不是上述提到的几种情况，那么发送给nil的消息的返回值将是未定义的。<br>0.2-如果target非nil，在target的Class中根据Selector去找IMP。（因为同一个方法可能在不同的类中有不同的实现，所以我们需要依赖于接收者的类来找到的确切的实现）。<br>1-首先它找到selector对应的方法实现:
+</em>1.1-在target类的方法缓存列表里检查有没有对应的方法实现，有的话，直接调用。<br><em>1.2-比较请求的selector和类方法列表中的selector，对应的话，直接调用。
+</em>1.3-比较请求的selector和父类方法列表，父类的父类，直至根类，如果有对应，则直接调用。（方法重写拦截父类方法的原理）<br>2-调用方法实现，并将接收者对象及方法的所有参数传给它。<br>3-最后，将实现函数的返回值作为自己的返回值。</p>
+</blockquote>
+<h5 id="protocol"><a href="#protocol" class="headerlink" title="protocol:"></a>protocol:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_object Protocol;</div></pre></td></tr></table></figure>
+<p>protocol是一个对象结构体。</p>
+<ul>
+<li><p>objc_:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 返回指定的协议</div><div class="line">Protocol * objc_getProtocol ( const char *name );</div><div class="line"></div><div class="line">// 获取运行时所知道的所有协议的数组</div><div class="line">Protocol ** objc_copyProtocolList ( unsigned int *outCount );</div><div class="line"></div><div class="line">// 创建新的协议实例</div><div class="line">Protocol * objc_allocateProtocol ( const char *name );</div><div class="line"></div><div class="line">// 在运行时中注册新创建的协议</div><div class="line">void objc_registerProtocol ( Protocol *proto );</div></pre></td></tr></table></figure>
+</li>
+<li><p>protocol_:<br>get:协议；属性；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 返回协议名</div><div class="line">const char * protocol_getName ( Protocol *p );</div><div class="line">// 获取协议的指定属性</div><div class="line">objc_property_t protocol_getProperty ( Protocol *proto, const char *name, BOOL isRequiredProperty, BOOL isInstanceProperty );</div></pre></td></tr></table></figure>
+</li>
+<li><p>copy:协议列表；属性列表；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 获取协议中的属性列表</div><div class="line">objc_property_t * protocol_copyPropertyList ( Protocol *proto, unsigned int *outCount );</div><div class="line">// 获取协议采用的协议</div><div class="line">Protocol ** protocol_copyProtocolList ( Protocol *proto, unsigned int *outCount );</div></pre></td></tr></table></figure>
+</li>
+<li><p>add:属性；方法；协议；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 为协议添加方法</div><div class="line">void protocol_addMethodDescription ( Protocol *proto, SEL name, const char *types, BOOL isRequiredMethod, BOOL isInstanceMethod );</div><div class="line"></div><div class="line">// 添加一个已注册的协议到协议中</div><div class="line">void protocol_addProtocol ( Protocol *proto, Protocol *addition );</div><div class="line"></div><div class="line">// 为协议添加属性</div><div class="line">void protocol_addProperty ( Protocol *proto, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount, BOOL isRequiredProperty, BOOL isInstanceProperty );</div></pre></td></tr></table></figure>
+</li>
+<li><p>isEqual：判断两协议等同；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 测试两个协议是否相等</div><div class="line">BOOL protocol_isEqual ( Protocol *proto, Protocol *other );</div></pre></td></tr></table></figure>
+</li>
+<li><p>comform：判断是否遵循协议；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 查看协议是否采用了另一个协议</div><div class="line">BOOL protocol_conformsToProtocol ( Protocol *proto, Protocol *other );</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="category"><a href="#category" class="headerlink" title="category"></a>category</h5><ul>
+<li>super:</li>
+</ul>
+<blockquote>
+<p>struct objc_super {<br>   <strong>unsafe_unretained id receiver;
+   </strong>unsafe_unretained Class super_class;<br>};</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct objc_super &#123;</div><div class="line">   __unsafe_unretained id receiver;</div><div class="line">   __unsafe_unretained Class super_class;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>原理：使用super来接收消息时，编译器会生成一个objc_super结构体。发送消息时，不是调用objc_msgSend函数，而是调用objc_msgSendSuper函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id objc_msgSendSuper ( struct objc_super *super, SEL op, ... );</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcod.jpg" alt="Kael wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OC/" rel="tag"># OC</a>
+          
+            <a href="/tags/runtime/" rel="tag"># runtime</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/16/Objective-C-Runtime-文档解读/" rel="next" title="Objective-C Runtime 文档解读">
+                <i class="fa fa-chevron-left"></i> Objective-C Runtime 文档解读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/25/Xcode-自定义代码块/" rel="prev" title="Xcode 自定义代码块">
+                Xcode 自定义代码块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://ws3.sinaimg.cn/large/006tNc79ly1fift1efkwyj30dw0dwglv.jpg"
+               alt="Kael" />
+          <p class="site-author-name" itemprop="name">Kael</p>
+           
+              <p class="site-description motion-element" itemprop="description">我命由我不由天~</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kaelzzs" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/u/f26ccbda4e66" title="简书" target="_blank">简书</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://my.yizhihongxing.com/aff.php?aff=7598" title="VPN购买(一枝红杏)" target="_blank">VPN购买(一枝红杏)</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RunTime-笔记"><span class="nav-number">1.</span> <span class="nav-text">RunTime-笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释"><span class="nav-number">1.1.</span> <span class="nav-text">名词解释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Definition-Data-Structures"><span class="nav-number">1.1.1.</span> <span class="nav-text">Class-Definition Data Structures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consstans"><span class="nav-number">1.1.2.</span> <span class="nav-text">Consstans</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粗暴理解"><span class="nav-number">1.1.3.</span> <span class="nav-text">粗暴理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类的本质"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">类的本质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档API结构"><span class="nav-number">1.1.4.</span> <span class="nav-text">文档API结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Class-Definition"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Class-Definition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class-API"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Class API</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#class"><span class="nav-number">1.1.4.2.1.</span> <span class="nav-text">class</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#copy-成员变量列表-ivarList-；属性列表-propertyList-；方法列表-methodList-；协议列表-protocolList-；"><span class="nav-number">1.1.4.2.2.</span> <span class="nav-text">copy :成员变量列表(ivarList)；属性列表(propertyList)；方法列表(methodList)；协议列表(protocolList)；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#add-成员变量（Ivar）；属性-Property-；方法-Method-；协议-Protocol-；"><span class="nav-number">1.1.4.2.3.</span> <span class="nav-text">add : 成员变量（Ivar）；属性(Property)；方法(Method)；协议(Protocol)；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#replace-属性（Property）；方法（Method）；"><span class="nav-number">1.1.4.2.4.</span> <span class="nav-text">replace : 属性（Property）；方法（Method）；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#respond-相应方法判断"><span class="nav-number">1.1.4.2.5.</span> <span class="nav-text">respond : 相应方法判断</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#isMetaClass-元类判断（内省）"><span class="nav-number">1.1.4.2.6.</span> <span class="nav-text">isMetaClass : 元类判断（内省）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#conform-遵循协议判断（内省）"><span class="nav-number">1.1.4.2.7.</span> <span class="nav-text">conform:遵循协议判断（内省）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#objc"><span class="nav-number">1.1.4.2.8.</span> <span class="nav-text">objc_ :</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态创建-销毁类、对象"><span class="nav-number">1.1.4.2.9.</span> <span class="nav-text">动态创建/销毁类、对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ivar"><span class="nav-number">1.1.4.2.10.</span> <span class="nav-text">ivar_</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#property"><span class="nav-number">1.1.4.2.11.</span> <span class="nav-text">property_:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IMP"><span class="nav-number">1.1.4.2.12.</span> <span class="nav-text">IMP:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Method"><span class="nav-number">1.1.4.2.13.</span> <span class="nav-text">Method:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#method"><span class="nav-number">1.1.4.2.14.</span> <span class="nav-text">method_:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#protocol"><span class="nav-number">1.1.4.2.15.</span> <span class="nav-text">protocol:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#category"><span class="nav-number">1.1.4.2.16.</span> <span class="nav-text">category</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kael</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
