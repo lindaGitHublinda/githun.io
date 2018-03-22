@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Linda技术博客]]></title>
-  <link href="kaelinda.vip/atom.xml" rel="self"/>
-  <link href="kaelinda.vip/"/>
-  <updated>2018-03-22T14:13:52+08:00</updated>
-  <id>kaelinda.vip/</id>
+  <link href="lindablog.vip/atom.xml" rel="self"/>
+  <link href="lindablog.vip/"/>
+  <updated>2018-03-22T14:30:59+08:00</updated>
+  <id>lindablog.vip/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[First Blog]]></title>
-    <link href="kaelinda.vip/15216890578431.html"/>
+    <link href="lindablog.vip/15216890578431.html"/>
     <updated>2018-03-22T11:24:17+08:00</updated>
-    <id>kaelinda.vip/15216890578431.html</id>
+    <id>lindablog.vip/15216890578431.html</id>
     <content type="html"><![CDATA[
 <p><img src="media/15216890578431/1.png" alt="1"/></p>
 
