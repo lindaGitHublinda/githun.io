@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>  
 	  
-  	出发~ - Linda技术博客
+  	isKindOfClass、isMemberOfClass和isSubclassOfClass的使用 - Linda技术博客
   	
 	</title>
 
@@ -118,12 +118,46 @@
 			<div class="mid-col-container"> <div id="content" class="inner">
 
 	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-		<h1 class="title" itemprop="name">出发~</h1>
+		<h1 class="title" itemprop="name">isKindOfClass、isMemberOfClass和isSubclassOfClass的使用</h1>
 		<div class="entry-content" itemprop="articleBody">
-			<p><img src="media/15216890578431/1.png" alt="1"/></p>
+			<ol>
+<li><p>官方API解释</p>
 
-<p>你不能无所事事的坐等人生带给你一切，你必须得自己努力争取。<br/>
-坚持自己坚持的，撸起袖子加油干！！！去找属于自己的One Piece！</p>
+<p>isKindOfClass: Returns a Boolean value that indicates whether the receiver is an instance of given class or an instance of any class that inherits from that class.</p>
+
+<p>isMemberOfClass: Returns a Boolean value that indicates whether the receiver is an instance of a given class.</p>
+
+<p>isSubclassOfClass:Returns a Boolean value that indicates whether the receiving class is a subclass of,or indentical to,a given class.</p></li>
+<li><p>作用的区别</p>
+
+<p>isKindOfClass:判断对象是否为某类或者其派生类的实例（对象方法）;</p>
+
+<p>isSubclassOfClass:判断对象是否为某类或者其派生类的实例（类方法）;</p>
+
+<p>isMemberOfClass:判断对象是否为某个特定类的实例(对象方法);</p></li>
+<li><p>例子</p>
+
+<p>1.首先申明 四个类 W&lt;X&lt;Y&lt;Z，继承关系 Z继承Y,Y继承X，X继承W。即W是最顶层的父类，Z是最基层的子类。<br/>
+Z *z = [[Z alloc] init];<br/>
+2.isKindOfClass(对象方法)<br/>
+[z isKindOfClass [Z Class]] //返回YES<br/>
+[z isKindOfClass [Y Class]] //返回 YES<br/>
+[z isKindOfClass [X Class]] //返回 YES<br/>
+[z isKindOfClass [W Class]] //返回 YES<br/>
+3.isMemberOfClass(对象方法)<br/>
+[z isMemberOfClass [Z Class]] //返回 YES<br/>
+[z isMemberOfClass [Y Class]] //返回 NO<br/>
+[z isMemberOfClass [X Class]] //返回 NO<br/>
+[z isMemberOfClass [W Class]] //返回 NO<br/>
+4.isSubclassOfClass(类方法)<br/>
+[Z isSubclassOfClass [Z Class]] //返回 YES<br/>
+[Z isSubclassOfClass [Y Class]] //返回 YES<br/>
+[Z isSubclassOfClass [X Class]] //返回 YES<br/>
+[Z isSubclassOfClass [W Class]] //返回 YES</p></li>
+<li><p>总结</p>
+
+<p>isSubclassOfClass 和 isKindOfClass作用基本一致，都是用来判断一个对象或者一个类是否为某个类或者某个类的子类，只是isSubclassOfClass 是类方法，isKindOfClass是对象方法，isMemberOfClass 筛选条件更为精确，苛刻，只有当类型完全匹配的时候，才会返回YES.</p></li>
+</ol>
 
 		</div>
 	</article>

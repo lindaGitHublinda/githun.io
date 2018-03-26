@@ -122,6 +122,221 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2018-03-26T15:08:26+08:00" itemprop="datePublished">2018/3/26</time>
+			</div>
+			
+			 
+			
+		</div>
+		<h1 class="title" itemprop="name"><a href="15220481060931.html" itemprop="url">
+		isKindOfClass、isMemberOfClass和isSubclassOfClass的使用</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ol>
+<li><p>官方API解释</p>
+
+<p>isKindOfClass: Returns a Boolean value that indicates whether the receiver is an instance of given class or an instance of any class that inherits from that class.</p>
+
+<p>isMemberOfClass: Returns a Boolean value that indicates whether the receiver is an instance of a given class.</p>
+
+<p>isSubclassOfClass:Returns a Boolean value that indicates whether the receiving class is a subclass of,or indentical to,a given class.</p></li>
+<li><p>作用的区别</p>
+
+<p>isKindOfClass:判断对象是否为某类或者其派生类的实例（对象方法）;</p>
+
+<p>isSubclassOfClass:判断对象是否为某类或者其派生类的实例（类方法）;</p>
+
+<p>isMemberOfClass:判断对象是否为某个特定类的实例(对象方法);</p></li>
+<li><p>例子</p>
+
+<p>1.首先申明 四个类 W&lt;X&lt;Y&lt;Z，继承关系 Z继承Y,Y继承X，X继承W。即W是最顶层的父类，Z是最基层的子类。<br/>
+Z *z = [[Z alloc] init];<br/>
+2.isKindOfClass(对象方法)<br/>
+[z isKindOfClass [Z Class]] //返回YES<br/>
+[z isKindOfClass [Y Class]] //返回 YES<br/>
+[z isKindOfClass [X Class]] //返回 YES<br/>
+[z isKindOfClass [W Class]] //返回 YES<br/>
+3.isMemberOfClass(对象方法)<br/>
+[z isMemberOfClass [Z Class]] //返回 YES<br/>
+[z isMemberOfClass [Y Class]] //返回 NO<br/>
+[z isMemberOfClass [X Class]] //返回 NO<br/>
+[z isMemberOfClass [W Class]] //返回 NO<br/>
+4.isSubclassOfClass(类方法)<br/>
+[Z isSubclassOfClass [Z Class]] //返回 YES<br/>
+[Z isSubclassOfClass [Y Class]] //返回 YES<br/>
+[Z isSubclassOfClass [X Class]] //返回 YES<br/>
+[Z isSubclassOfClass [W Class]] //返回 YES</p></li>
+<li><p>总结</p>
+
+<p>isSubclassOfClass 和 isKindOfClass作用基本一致，都是用来判断一个对象或者一个类是否为某个类或者某个类的子类，只是isSubclassOfClass 是类方法，isKindOfClass是对象方法，isMemberOfClass 筛选条件更为精确，苛刻，只有当类型完全匹配的时候，才会返回YES.</p></li>
+</ol>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2018-03-23T15:05:14+08:00" itemprop="datePublished">2018/3/23</time>
+			</div>
+			
+			 
+			
+		</div>
+		<h1 class="title" itemprop="name"><a href="15217887141682.html" itemprop="url">
+		Block的使用</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p><img src="media/15217887141682/1244124-e67aaa495b4de954.png" alt="1244124-e67aaa495b4de954"/></p>
+
+<h2 id="toc_0">内存中的区域划分(预备知识)</h2>
+
+<ol>
+<li>栈区：由系统自动分配和释放，存放局部变量，函数的参数值等。容量小速度快，有序。</li>
+<li>堆区：由程序员分配和释放，如果不释放出现内存泄露。程序会收回您的内存，容量大，速度慢，无序。</li>
+<li>静态存储区：全局变量（外部变量）和静态变量都存放在静态区域。当程序结束时，系统回收</li>
+<li>常量区：存放常量的内存区域，程序结束时，系统回收</li>
+<li>代码区：存放二进制代码的区域 </li>
+</ol>
+
+<h2 id="toc_1">Block的修饰符为什么要用copy</h2>
+
+<ol>
+<li><p>copy 和 mutable Copy</p>
+
+<pre><code>NSString * string = @&quot;Linda&quot;;
+[string copy];//拷贝出的内容为Linda的NSStirng类型的字符串
+[string mutableCopy];//拷贝出内容为Linda的NSMutableString的字符串
+
+NSDictionary  * dic = @{@&quot;name&quot;:@&quot;Linda&quot;};
+[dic copy];//拷贝出内容与dict相同的NSDitionary类型的字典
+[dic mutableCopy];//拷贝出内容与dict相同的NSMutableDictionary类型的字典
+
+NSArray  * array = @[@&quot;Linda&quot;];
+[array copy];//拷贝出内容与array相同的NSArray类型的数组
+[array mutableCopy];//拷贝出内容与array相同的NSMutableArray类型的数组
+</code></pre></li>
+</ol>
+
+<p>总结：copy拷贝出来的对象类型总是不可变类型<br/>
+(例如：NSString,NSDictionary,NSArray等等)，<br/>
+ mutableCopy拷贝出来的对象类型总是可变类型<br/>
+ (例如：NSMutableString,NSMutableDictionary,NSMutableArray等等)</p>
+
+<ol>
+<li><p>深拷贝与浅拷贝</p>
+
+<p>深拷贝：拷贝出来的对象与源对象地址不一致，意味着我们修改拷贝对象的值对源对象的值没有影响。<br/>
+浅拷贝：拷贝出来的对象与源对象地址一致，意味着修改拷贝对象的值会直接影响到源对象。</p>
+
+<pre><code>@property (nonatomic, strong)NSArray * array;
+@end
+@implementation ViewController
+- (void)viewDidLoad {
+ [super viewDidLoad];
+ NSMutableArray * mArray = [NSMutableArray array];
+[mArray addObject:@&quot;Linda&quot;];
+ self.array = mArray;
+[mArray addObject:@&quot;Kael&quot;];
+ NSLog(@&quot;array = %@, mArray =%@&quot;,self.array,mArray);
+}
+</code></pre>
+
+<p>输出结果：<br/>
+2018-03-23 16:35:48.448660+0800 test[10742:341212] array = (<br/>
+Linda,<br/>
+Kael<br/>
+), mArray =(<br/>
+Linda,<br/>
+Kael<br/>
+)<br/>
+原因：self.array是NSArray对象，其实骨子里是NSMutableArray对象</p>
+
+<pre><code>@property (nonatomic, strong)NSArray * array;
+@end
+@implementation ViewController
+- (void)viewDidLoad {
+ [super viewDidLoad];
+ NSMutableArray * mArray = [NSMutableArray array];
+[mArray addObject:@&quot;Linda&quot;];
+ self.array = [mArray copy];
+ [mArray addObject:@&quot;Kael&quot;];
+ NSLog(@&quot;array = %@, mArray =%@&quot;,self.array,mArray);
+}
+</code></pre>
+
+<p>输出结果：<br/>
+2018-03-23 16:39:27.343633+0800 test[10844:345635] array = (<br/>
+Linda<br/>
+), mArray =(<br/>
+Linda,<br/>
+Kael<br/>
+)</p></li>
+</ol>
+
+<p>原因：使用了copy不管赋值是可变还是不可变数组，NSArray就是NSArray</p>
+
+<p><img src="media/15217887141682/1862021-d9694468cbad6cdc.png" alt="1862021-d9694468cbad6cd"/></p>
+
+<ol>
+<li><p>blok为什么要用copy</p>
+
+<p>a、block是一个对象，创建的时候默认分配的内存是在栈上，而不是堆上，所以它的作用域仅仅限创建时候的当前上下文（函数，方法等），当你在该作用域外调用该block时，程序就会崩溃。所以使用copy将其拷贝到堆内存上。<br/>
+b、block创建在栈上，而block的代码中可能会用到本地的一些变量，只有将其拷贝到堆上，才能用这些变量。</p></li>
+<li><p>block 为什么不用retain<br/>
+retain这是增加了一次计数，block的内存还是在栈上，并没有存在堆上，存在栈上的block可能随时被系统回收。</p></li>
+<li><p>为什么进入block中的对象引用计数需要自动加1<br/>
+Block执行的是回调，因此block并不知道其中的对象obj创建后会在什么时候被释放，为了不在block使用obj之前，对象已经被释放，block就retain了obj一次</p></li>
+<li><p>block和函数的关系<br/>
+Block的使用很像函数指针，不过与函数最大的不同是Block可以访问函数以外、词法作用域以内的外部变量的值。<br/>
+换句话说，Block不仅 实现函数的功能，还能携带函数的执行环境。</p></li>
+<li><p>对于block的理解<br/>
+block实际上是: 指向结构体的指针<br/>
+编译器会将block的内部代码生成对应的函数</p></li>
+<li><p>对于基本数据类型，进入到block中会被当做常量处理</p>
+
+<pre><code>int  num1 = 10; 
+void(^block1)() = ^{
+NSLog(@&quot;num1 is %d&quot;,num1);
+ };
+num1 = 20;
+block1();//输出10
+
+//改进：使用block，使进入block块中的变量不被当做常量来使用
+__block int  num1 = 10; //__block
+void(^block1)() = ^{
+NSLog(@&quot;num1 is %d&quot;,num1);
+ };
+num1 = 20;
+block1();//输出20
+</code></pre></li>
+<li><p>block中self的循环引用</p>
+
+<p>block默认创建在栈上，所以对要其进行copy操作，将其拷贝到堆区，便于更好的操作对象。但是执行了copy操作之后，block中使用self，对象会被retain一次（block在堆区才会起到retain作用），会造成循环引用。<br/>
+在MRC下，使用__block修饰<br/>
+在ARC下，使用__unsafe_unretained\weak修饰</p></li>
+<li><p>__block与__weak的真正区别</p>
+
+<p>1）__block不管是ARC还是MRC模式下都可以使用，可以修饰对象，还可以修饰基本数据类型。 <br/>
+2）__weak只能在ARC模式下使用，也只能修饰对象（NSString），不能修饰基本数据类型（int）。 <br/>
+3）__block对象可以在block中被重新赋值，__weak不可以。 <br/>
+4）__block对象在ARC下可能会导致循环引用，非ARC下会避免循环引用，__weak只在ARC下使用，可以避免循环引用。</p></li>
+</ol>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2018-03-22T11:24:17+08:00" itemprop="datePublished">2018/3/22</time>
 			</div>
 			
@@ -129,12 +344,13 @@
 			
 		</div>
 		<h1 class="title" itemprop="name"><a href="15216890578431.html" itemprop="url">
-		First Blog</a></h1>
+		出发~</a></h1>
 		<div class="entry-content" itemprop="articleBody">
 			
 			<p><img src="media/15216890578431/1.png" alt="1"/></p>
 
-<p>Hahahhaha   test</p>
+<p>你不能无所事事的坐等人生带给你一切，你必须得自己努力争取。<br/>
+坚持自己坚持的，撸起袖子加油干！！！去找属于自己的One Piece！</p>
 
 
 			
