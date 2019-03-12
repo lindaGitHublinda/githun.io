@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	iOS 动画全解 (1) - kaelinda
+  	
+	</title>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	.share-comment{ padding: 25px 0px; clear: both;}
+	hr{ margin: 20px 0px;border: 0; border-top:solid 1px #ddd;}
+	</style>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+				 
+				 	<div class="profilepic">
+						<img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" style="width:160px;">
+					</div>
+            	
+					
+					<h1><a href="index.html">kaelinda</a></h1>
+					<p class="subtitle">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</p>
+					<nav id="main-nav">
+						<ul class="main">
+						
+						  <li id=""><a target="_self" href="index.html">最近更新</a></li>
+						
+						  <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+						
+						  <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+						
+						  <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+						
+						  <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+						
+						  <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+						
+						  <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+						
+						  <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+						
+						  <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+						
+						  <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+						
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+
+								
+
+								<a class="rss" href="atom.xml" title="RSS">RSS</a>
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div class="mid-col-container"> <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">iOS 动画全解 (1)</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<h2 id="toc_0">iOS动画&quot;概述&quot;（瞎说一通）</h2>
+
+<p>Apple 为开发者提供的视图动画框架有如下几种：</p>
+
+<ul>
+<li><code>UIKit</code>：高级别框架,允许程序员创建视图,窗口,按钮,和其他 UI 相关的控件。它也将低层的 API 组合到一个 易于使用的高级别 API 中。</li>
+<li><code>Quartz 2D</code>：运行内部的用于 iOS 画图的主引擎;UIKit 使用了 Quarz。 重点在画图。</li>
+<li><p><code>Core Graphics</code>(核心图层)：加载图片，绘制图片等的框架重点在图形图片的渲染。</p></li>
+<li><p><code>Core Animation</code>：iOS上的最基础的，应用最广泛的动画框架。（加载到CALayer上的动画）<br/>
+<code>Core Animation</code> 其实是一个令人误解的命名。你可能认为它只是用来做动画的，但实际上它是从一个叫做<code>Layer Kit</code>这么一个不怎么和动画有关的名字演变而来，所以做动画这只是<code>Core Animation</code>特性的冰山一角。 <code>Core Animation</code>是一个复合引擎，它的职责就是尽可能快地组合屏幕上不同的可视内容，这个内容是被分解成独立的图层，存储在一个叫做图层树的体系之中。于是这个树形成了<code>UIKit</code>以及在iOS应用程序当中你所能在屏幕上 看见的一切的基础。</p></li>
+</ul>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_1">CALayer 和 UIView</h2>
+
+<h3 id="toc_2">CALayer</h3>
+
+<p><code>CALayer</code> 类在概念上和 <code>UIView</code> 类似，同样也是一些被层级关系树管理的矩形块，同样也可以包含一些内 容(像图片，文本或者背景色)，管理子图层的位置。它们有一些方法和属性用来做动画和变换。和 最 大的不同是<code>CALayer</code>不处理用户的交互。</p>
+
+<h3 id="toc_3">平行的层级关系</h3>
+
+<p>每一个<code>UIView</code>都有一个<code>CALayer</code>实例的图层属性，也就是所谓的<code>backing layer</code>，视图的职责就是创建并管理这个图层，以确保当子视图在层级关系中添加或者被移除的时候，他们关联的图层也同样对应在层级关系树当中有相同的操作。(可以理解为 UIViewController  和 VC.view的关系，只不过VC是UIView的管理调度者,UIView 是 CALayer的管理调度者)</p>
+
+<h3 id="toc_4">CALayer的能力</h3>
+
+<ul>
+<li>阴影，圆角，带颜色的边框 • 3D变换</li>
+<li>非矩形范围</li>
+<li>透明遮罩</li>
+<li><p>多级非线性动画</p></li>
+<li><p>contents属性</p></li>
+</ul>
+
+		</div>
+	</article>
+	<div class="share-comment">
+	 
+
+	  
+
+	  
+
+	</div>
+</div>        </div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a> &nbsp;&nbsp; 
+Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a>
+      </footer>
+		</div>
+	</div>
+
+  
+    
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

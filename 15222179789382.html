@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	iOS GCD&&多线程 - kaelinda
+  	
+	</title>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	.share-comment{ padding: 25px 0px; clear: both;}
+	hr{ margin: 20px 0px;border: 0; border-top:solid 1px #ddd;}
+	</style>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+				 
+				 	<div class="profilepic">
+						<img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" style="width:160px;">
+					</div>
+            	
+					
+					<h1><a href="index.html">kaelinda</a></h1>
+					<p class="subtitle">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</p>
+					<nav id="main-nav">
+						<ul class="main">
+						
+						  <li id=""><a target="_self" href="index.html">最近更新</a></li>
+						
+						  <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+						
+						  <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+						
+						  <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+						
+						  <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+						
+						  <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+						
+						  <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+						
+						  <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+						
+						  <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+						
+						  <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+						
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+
+								
+
+								<a class="rss" href="atom.xml" title="RSS">RSS</a>
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div class="mid-col-container"> <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">iOS GCD&&多线程</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<h2 id="toc_0">基础篇</h2>
+
+<h3 id="toc_1">GCD用途</h3>
+
+<blockquote>
+<p>GCD 是 Grand Central Dispatch 的缩写。</p>
+</blockquote>
+
+<ul>
+<li>GCD 可用于多核的并行运算</li>
+<li>GCD 会自动利用更多的 CPU 内核（比如双核、四核）</li>
+<li>GCD 会自动管理线程的生命周期（创建线程、调度任务、销毁线程）</li>
+<li>程序员只需要告诉 GCD 想要执行什么任务，不需要编写任何线程管理代码</li>
+</ul>
+
+<span id="more"></span><!-- more -->
+
+<h3 id="toc_2">GCD 任务和队列</h3>
+
+<ul>
+<li><p>任务：就是要执行的操作，要做的事情，要执行的代码块，比如GCD中Block代码块</p>
+<ul>
+<li><p>同步执行：</p>
+<ul>
+<li>会 <strong>等待</strong> 队列前面的任务完成后继续往下执行， </li>
+<li>只能在 <strong>当前线程</strong> 中执行，</li>
+<li>不具备 <strong>开辟新线程的能力</strong></li>
+</ul></li>
+<li><p>异步执行：</p>
+<ul>
+<li>不等待</li>
+<li>具备开辟新线程的能力，可以开辟线程执行任务，也可以不开辟新线程</li>
+</ul></li>
+</ul></li>
+<li><p>队列：一种特殊的线性表，采用 FIFO（先进先出）的原则</p>
+<ul>
+<li><p>串行队列：每次只有一个任务被执行。让任务一个接着一个地执行。（只开启一个线程，一个任务执行完毕后，再执行下一个任务）</p></li>
+<li><p>并发队列：可以让多个任务并发（同时）执行。（可以开启多个线程，并且同时执行任务）</p></li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>并发队列的并发功能只有在异步（dispatch_async）函数下才有效<br/>
+如果并发队列再同步函数下，依旧会按顺序执行，并没能体现出并发功能</p>
+</blockquote>
+
+<h3 id="toc_3">GCD 使用</h3>
+
+<h4 id="toc_4">GCD 步骤</h4>
+
+<ol>
+<li>创建队列（串行队列或者并行队列）</li>
+<li>将任务追加到队列中</li>
+</ol>
+
+<h4 id="toc_5">队列的创建</h4>
+
+<ul>
+<li><p>串行队列的创建方法</p>
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_SERIAL);
+</code></pre></li>
+<li><p>并发队列的创建方法</p>
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+</code></pre></li>
+<li><p>主队列的获取方法</p>
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_get_main_queue();
+</code></pre>
+<p><strong>划重点： 所有放在主队列中的任务，都会放到主线程中执行!!!!!!!!</strong></p></li>
+<li><p>全局并发队列创建</p>
+<pre><code class="language-text">/**
+* 默认并发队列<br/>
+* DISPATCH_QUEUE_PRIORITY_DEFAULT 默认优先级<br/>
+* 第二个参数没什么用（预留字段） 默认0<br/>
+*/<br/>
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+</code></pre></li>
+</ul>
+
+<h4 id="toc_6">任务的创建</h4>
+
+<ul>
+<li>同步执行任务创建方法</li>
+</ul>
+
+<pre><code class="language-text">dispatch_sync(queue, ^{
+    // 这里放同步执行任务代码
+});
+</code></pre>
+
+<ul>
+<li>异步执行任务创建方法</li>
+</ul>
+
+<pre><code class="language-text">dispatch_async(queue, ^{
+    // 这里放异步执行任务代码
+});
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">区别</th>
+<th style="text-align: center">并发队列</th>
+<th style="text-align: center">串行队列</th>
+<th style="text-align: center">主队列</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center">同步(sync)</td>
+<td style="text-align: center">当前线程，串行执行</td>
+<td style="text-align: center">当前线程，串行执行</td>
+<td style="text-align: center">死锁</td>
+</tr>
+<tr>
+<td style="text-align: center">异步(async)</td>
+<td style="text-align: center">能开辟新线程(多个)，并发执行任务</td>
+<td style="text-align: center">新线程(一个)中执行，串行执行任务</td>
+<td style="text-align: center">为开辟新线程，串行执行任务</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_7">GCD 基本使用</h3>
+
+<ul>
+<li><p>同步 串行</p>
+<blockquote>
+<p>所有任务都是在当前线程（主线程）中执行的，并没有开启新的线程（同步执行不具备开启新线程的能力）。<br/>
+所有任务都在打印的syncConcurrent---begin和syncConcurrent---end之间执行（同步任务需要等待队列的任务执行结束）。<br/>
+任务是按顺序执行的（串行队列每次只有一个任务被执行，任务一个接一个按顺序执行）。</p>
+</blockquote></li>
+<li><p>同步 并发</p>
+<blockquote>
+<p>所有任务都是在当前线程（主线程）中执行的，没有开启新的线程（同步执行不具备开启新线程的能力）。<br/>
+所有任务都在打印的syncConcurrent---begin和syncConcurrent---end之间执行的（同步任务需要等待队列的任务执行结束）。<br/>
+任务按顺序执行的。按顺序执行的原因：虽然并发队列可以开启多个线程，并且同时执行多个任务。但是因为本身不能创建新线程，只有当前线程这一个线程（同步任务不具备开启新线程的能力），所以也就不存在并发。而且当前线程只有等待当前队列中正在执行的任务执行完毕之后，才能继续接着执行下面的操作（同步任务需要等待队列的任务执行结束）。所以任务只能一个接一个按顺序执行，不能同时被执行。</p>
+</blockquote></li>
+<li><p>异步 串行</p>
+<blockquote>
+<p>开启了一条新线程（异步执行具备开启新线程的能力，串行队列只开启一个线程）。<br/>
+所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才开始执行的（异步执行不会做任何等待，可以继续执行任务）。<br/>
+任务是按顺序执行的（串行队列每次只有一个任务被执行，任务一个接一个按顺序执行）。</p>
+</blockquote></li>
+<li><p>异步 并发</p>
+<blockquote>
+<p>除了当前线程（主线程），系统又开启了3个线程，并且任务是交替/同时执行的。（异步执行具备开启新线程的能力。且并发队列可开启多个线程，同时执行多个任务）。<br/>
+所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才执行的。说明当前线程没有等待，而是直接开启了新线程，在新线程中执行任务（异步执行不做等待，可以继续执行任务）。</p>
+</blockquote></li>
+<li><p>同步 主队列</p>
+<blockquote>
+<p>在不同线程中调用结果也是不一样，在主线程中调用会出现死锁，而在其他线程中则不会。</p>
+</blockquote></li>
+<li><p>异步 主队列</p>
+<blockquote>
+<p>所有任务都是在当前线程（主线程）中执行的，并没有开启新的线程（虽然异步执行具备开启线程的能力，但因为是主队列，所以所有任务都在主线程中）。<br/>
+所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才开始执行的（异步执行不会做任何等待，可以继续执行任务）。<br/>
+任务是按顺序执行的（因为主队列是串行队列，每次只有一个任务被执行，任务一个接一个按顺序执行）。</p>
+</blockquote></li>
+</ul>
+
+<h3 id="toc_8">GCD 其他操作</h3>
+
+<h4 id="toc_9">栅栏函数</h4>
+
+<ul>
+<li>栅栏函数：<code>dispatch_barrier_async</code> </li>
+</ul>
+
+<blockquote>
+<p>先执行barrier之前的任务，再执行barrier任务,最后执行barrier之后的任务</p>
+</blockquote>
+
+<h4 id="toc_10">延时</h4>
+
+<ul>
+<li><p>延时函数：<code>dispatch_after</code></p>
+<pre><code class="language-text">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    // 2.0秒后异步追加任务代码到主队列，并开始执行<br/>
+    NSLog(@&quot;after---%@&quot;,[NSThread currentThread]);  // 打印当前线程<br/>
+});
+</code></pre></li>
+</ul>
+
+<h4 id="toc_11">一次性代码</h4>
+
+<ul>
+<li><p>一次性代码</p>
+<pre><code class="language-text">static dispatch_once_t onceToken;
+dispatch_once(&amp;onceToken, ^{<br/>
+    // 只执行1次的代码(这里面默认是线程安全的)<br/>
+});
+</code></pre></li>
+</ul>
+
+<h4 id="toc_12">快速迭代</h4>
+
+<ul>
+<li>GCD 快速迭代 <code>dispatch_apply</code></li>
+</ul>
+
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    NSLog(@&quot;apply---begin&quot;);
+    dispatch_apply(6, queue, ^(size_t index) {
+        NSLog(@&quot;%zd---%@&quot;,index, [NSThread currentThread]);
+    });\
+</code></pre>
+
+<h4 id="toc_13">队列组</h4>
+
+<ul>
+<li>队列组 <code>dispatch_group</code></li>
+</ul>
+
+<pre><code class="language-text">dispatch_group_async
+</code></pre>
+
+		</div>
+	</article>
+	<div class="share-comment">
+	 
+
+	  
+
+	  
+
+	</div>
+</div>        </div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a> &nbsp;&nbsp; 
+Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a>
+      </footer>
+		</div>
+	</div>
+
+  
+    
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

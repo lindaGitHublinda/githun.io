@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>  
 	  
-  	isKindOfClass、isMemberOfClass和isSubclassOfClass的使用 - Linda技术博客
+  	iOS设备上实现DLNA功能 Platinum 篇 - kaelinda
   	
 	</title>
 
@@ -12,7 +12,7 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="atom.xml" rel="alternate" title="Linda技术博客" type="application/atom+xml">
+	<link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
 
 	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -77,15 +77,35 @@
 			<div class="intrude-less">
 				<header id="header" class="inner">
 				 
+				 	<div class="profilepic">
+						<img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" style="width:160px;">
+					</div>
+            	
 					
-					<h1><a href="index.html">Linda技术博客</a></h1>
-					<p class="subtitle"></p>
+					<h1><a href="index.html">kaelinda</a></h1>
+					<p class="subtitle">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</p>
 					<nav id="main-nav">
 						<ul class="main">
 						
-						  <li id=""><a target="self" href="index.html">Home</a></li>
+						  <li id=""><a target="_self" href="index.html">最近更新</a></li>
 						
-						  <li id=""><a target="_self" href="archives.html">Archives</a></li>
+						  <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+						
+						  <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+						
+						  <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+						
+						  <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+						
+						  <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+						
+						  <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+						
+						  <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+						
+						  <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+						
+						  <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
 						
 						</ul>
 					</nav>
@@ -101,9 +121,9 @@
 
 
 
-
-
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
 
 								
 
@@ -118,46 +138,38 @@
 			<div class="mid-col-container"> <div id="content" class="inner">
 
 	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-		<h1 class="title" itemprop="name">isKindOfClass、isMemberOfClass和isSubclassOfClass的使用</h1>
+		<h1 class="title" itemprop="name">iOS设备上实现DLNA功能 Platinum 篇</h1>
 		<div class="entry-content" itemprop="articleBody">
-			<ol>
-<li><p>官方API解释</p>
+			<h2 id="toc_0">DLNA 相关</h2>
 
-<p>isKindOfClass: Returns a Boolean value that indicates whether the receiver is an instance of given class or an instance of any class that inherits from that class.</p>
+<ul>
+<li>DLNA</li>
+<li>Miracast</li>
+<li>Airplay</li>
+</ul>
 
-<p>isMemberOfClass: Returns a Boolean value that indicates whether the receiver is an instance of a given class.</p>
+<p>网络环境：同一个网关下，即同一个局域网的同一网段</p>
 
-<p>isSubclassOfClass:Returns a Boolean value that indicates whether the receiving class is a subclass of,or indentical to,a given class.</p></li>
-<li><p>作用的区别</p>
+<h3 id="toc_1">基本名词解释</h3>
 
-<p>isKindOfClass:判断对象是否为某类或者其派生类的实例（对象方法）;</p>
+<ul>
+<li>DLNA全称： DIGITAL LIVING NETWORK ALLIANCE(数字生活网络联盟)</li>
+<li>宗旨： Enjoy your music, photos and videos, anywhere anytime</li>
+<li>协议： DLNA包含若干协议和标准，最重要的也是我们最常用的就是UPnP技术</li>
+<li>通用即插即用 (UPnP) 是一种用于 PC 机和智能设备（或仪器）的常见对等网络连接的体系结构，尤其是在家庭中。UPnP 以 Internet 标准和技术（例如 TCP/IP、HTTP 和 XML）为基础，使这样的设备彼此可自动连接和协同工作，从而使网络（尤其是家庭网络）对更多的人成为可能</li>
+</ul>
 
-<p>isSubclassOfClass:判断对象是否为某类或者其派生类的实例（类方法）;</p>
+<h3 id="toc_2">技术名词解释</h3>
 
-<p>isMemberOfClass:判断对象是否为某个特定类的实例(对象方法);</p></li>
-<li><p>例子</p>
+<ul>
+<li>DMC：控制点</li>
+<li>DMS：资源服务器</li>
+<li>DMR：渲染器</li>
+</ul>
 
-<p>1.首先申明 四个类 W&lt;X&lt;Y&lt;Z，继承关系 Z继承Y,Y继承X，X继承W。即W是最顶层的父类，Z是最基层的子类。<br/>
-Z *z = [[Z alloc] init];<br/>
-2.isKindOfClass(对象方法)<br/>
-[z isKindOfClass [Z Class]] //返回YES<br/>
-[z isKindOfClass [Y Class]] //返回 YES<br/>
-[z isKindOfClass [X Class]] //返回 YES<br/>
-[z isKindOfClass [W Class]] //返回 YES<br/>
-3.isMemberOfClass(对象方法)<br/>
-[z isMemberOfClass [Z Class]] //返回 YES<br/>
-[z isMemberOfClass [Y Class]] //返回 NO<br/>
-[z isMemberOfClass [X Class]] //返回 NO<br/>
-[z isMemberOfClass [W Class]] //返回 NO<br/>
-4.isSubclassOfClass(类方法)<br/>
-[Z isSubclassOfClass [Z Class]] //返回 YES<br/>
-[Z isSubclassOfClass [Y Class]] //返回 YES<br/>
-[Z isSubclassOfClass [X Class]] //返回 YES<br/>
-[Z isSubclassOfClass [W Class]] //返回 YES</p></li>
-<li><p>总结</p>
+<h3 id="toc_3">发现设备</h3>
 
-<p>isSubclassOfClass 和 isKindOfClass作用基本一致，都是用来判断一个对象或者一个类是否为某个类或者某个类的子类，只是isSubclassOfClass 是类方法，isKindOfClass是对象方法，isMemberOfClass 筛选条件更为精确，苛刻，只有当类型完全匹配的时候，才会返回YES.</p></li>
-</ol>
+<p>智能终端设备加入组网，搜索其他设备的基本流程。当一个新的DMC加入局域网，为了获取当前网段里有哪些智能设备，需要遵循<code>SSDP</code>向默认的多播IP和端口发送获取信息的请求。对于<code>DMC</code> 可以使用DLNA定义的 <code>搜索响应方式</code> 来发现设备，这会用到HTTP的扩展协议<code>M-SEARCH</code></p>
 
 		</div>
 	</article>

@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	iOS CALayer动画 - kaelinda
+  	
+	</title>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	.share-comment{ padding: 25px 0px; clear: both;}
+	hr{ margin: 20px 0px;border: 0; border-top:solid 1px #ddd;}
+	</style>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+				 
+				 	<div class="profilepic">
+						<img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" style="width:160px;">
+					</div>
+            	
+					
+					<h1><a href="index.html">kaelinda</a></h1>
+					<p class="subtitle">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</p>
+					<nav id="main-nav">
+						<ul class="main">
+						
+						  <li id=""><a target="_self" href="index.html">最近更新</a></li>
+						
+						  <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+						
+						  <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+						
+						  <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+						
+						  <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+						
+						  <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+						
+						  <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+						
+						  <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+						
+						  <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+						
+						  <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+						
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+
+								
+
+								<a class="rss" href="atom.xml" title="RSS">RSS</a>
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div class="mid-col-container"> <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">iOS CALayer动画</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<h2 id="toc_0">keyPath</h2>
+
+<pre><code class="language-text">transform.scale = 比例轉換
+transform.scale.x = 宽的比例轉換
+transform.scale.y = 高的比例轉換
+transform.rotation.z = 平面圖的旋轉
+opacity = 透明度
+margin=边框间隔?
+zPosition = 平面图的位置
+backgroundColor = 背景色
+cornerRadius = layer的角度
+borderWidth = 边框宽度
+contents = 内容?
+bounds = 大小?
+contentsRect = 内容矩形
+frame = 位置
+hidden = 隐藏
+mask = 标记
+maskToBounds
+position = 位置
+shadowOffset = 阴影偏移?
+shadowColor = 阴影颜色
+shadowRadius = 阴影角度
+</code></pre>
+
+<h2 id="toc_1">CALayer</h2>
+
+<h2 id="toc_2">CoreAnimation</h2>
+
+<h2 id="toc_3">CAAnimation</h2>
+
+<h3 id="toc_4">基本属性说明</h3>
+
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>duration</td>
+<td>动画持续时间</td>
+</tr>
+<tr>
+<td>repeatCount</td>
+<td>重复次数，无限循环可以设置INFINITY(HUGE_VALF)或者MAXFLOAT</td>
+</tr>
+<tr>
+<td>repeatDuration</td>
+<td>重复时间</td>
+</tr>
+<tr>
+<td>removeOnCompletion</td>
+<td>默认为YES，代表动画执行完毕，从Layer上移除，图形会恢复到动画执行之前的状态。如果想要保持动画最终状态，那就设置为NO，并且fillMode = kCAFillModeForwards；</td>
+</tr>
+<tr>
+<td>fillMode</td>
+<td>当前视图在非active时段的状态比如 动画开始前 动画结束后</td>
+</tr>
+<tr>
+<td>beginTime</td>
+<td>可以用来延迟动画开始时间，让多个动画顺序执行</td>
+</tr>
+<tr>
+<td>timingFuction</td>
+<td>速度控制函数，控制动画运行的节奏</td>
+</tr>
+<tr>
+<td>deleget</td>
+<td>代理</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_5">fillMode 说明</h3>
+
+<ul>
+<li><p><code>kCAFillModeRemoved</code> 这个是默认值，也就是说当动画开始前和动画结束后，动画对layer都没有影响，动画结束后，layer会恢复到之前的状态</p></li>
+<li><p><code>kCAFillModeForwards</code> 当动画结束后，layer会一直保持着动画最后的状态</p></li>
+<li><p><code>kCAFillModeBackwards</code> 在动画开始前，只需要将动画加入了一个layer，layer便立即进入动画的初始状态并等待动画开始。</p></li>
+<li><p><code>kCAFillModeBoth</code> 这个其实就是上面两个的合成.动画加入后开始之前，layer便处于动画初始状态，动画结束后layer保持动画最后的状态</p></li>
+</ul>
+
+<h3 id="toc_6">动画的暂停 和 恢复</h3>
+
+<pre><code class="language-text">#pragma - mark 暂停CALayer的动画
+-(void)pauseLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+
+    // 让CALayer的时间停止走动
+      layer.speed = 0.0;
+    // 让CALayer的时间停留在pausedTime这个时刻
+    layer.timeOffset = pausedTime;
+}
+
+#pragma - mark 恢复CALayer的动画
+-(void)resumeLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = layer.timeOffset;
+    // 1. 让CALayer的时间继续行走
+      layer.speed = 1.0;
+    // 2. 取消上次记录的停留时刻
+      layer.timeOffset = 0.0;
+    // 3. 取消上次设置的时间
+      layer.beginTime = 0.0;
+    // 4. 计算暂停的时间(这里也可以用CACurrentMediaTime()-pausedTime)
+    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    // 5. 设置相对于父坐标系的开始时间(往后退timeSincePause)
+      layer.beginTime = timeSincePause;
+}
+</code></pre>
+
+<h2 id="toc_7">CABasicAnimation</h2>
+
+<h2 id="toc_8">CAKeyframeAnimation 关键帧动画</h2>
+
+<h2 id="toc_9">CAAnimationGroup 动画组</h2>
+
+<h2 id="toc_10">贝塞尔曲线</h2>
+
+<h2 id="toc_11">弹性动画 CASpringAnimation</h2>
+
+<pre><code class="language-text">CASpringAnimation *springAnimation = [CASpringAnimation animationWithKeyPath:@&quot;transform.scale&quot;];
+springAnimation.damping = 7;// 阻尼系数(学过物理的都知道)
+springAnimation.stiffness = 100;// 刚度系数（形变后产生弹力的大小的系数。刚度系数越大，弹力越大）
+springAnimation.mass = 1;// 惯性系数 代表物体质量
+springAnimation.initialVelocity = 2.0;// 初始速度 0 初始速度与运动方向一致 负数，初始速度与运动方向不一致
+springAnimation.fromValue = @0;// 初始动画改变属性的值
+springAnimation.toValue = @1;// 最终动画改变属性的值
+springAnimation.duration = 2.0;// 动画时长「敲黑板，划重点！这个很重要」
+[self.layer addAnimation:springAnimation forKey:@&quot;springScale&quot;];
+</code></pre>
+
+<h2 id="toc_12">特殊的Layer实现特殊动画</h2>
+
+<h3 id="toc_13">CATransition</h3>
+
+<h3 id="toc_14">CAReplicatorLayer</h3>
+
+<h3 id="toc_15">CAEmitterLayer 粒子引擎</h3>
+
+		</div>
+	</article>
+	<div class="share-comment">
+	 
+
+	  
+
+	  
+
+	</div>
+</div>        </div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a> &nbsp;&nbsp; 
+Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a>
+      </footer>
+		</div>
+	</div>
+
+  
+    
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>

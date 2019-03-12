@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>  
+	  
+  	每天学习一个shell技能 （1） - kaelinda
+  	
+	</title>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+
+	<link href="asset/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="asset/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<script src="asset/javascripts/jquery.min.js"></script>
+	<script src="asset/highlightjs/highlight.pack.js"></script>
+	<link href="asset/highlightjs/styles/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script>hljs.initHighlightingOnLoad();</script>
+
+	<!--[if lt IE 9]><script src="asset/javascripts/html5.js"></script><![endif]-->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
+	<style type="text/css">
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Nunito-Light'), url(asset/font/1TiHc9yag0wq3lDO9cw0voX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito-Regular'), url(asset/font/6TbRXKWJjpj6V2v_WyRbMX-_kf6ByYO6CLYdB4HQE-Y.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito-Bold'), url(asset/font/TttUCfJ272GBgSKaOaD7KoX0hVgzZQUfRDuZrPvH3D8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+	</style>
+	
+	<style type="text/css">
+	.container .left-col{ opacity: 1;}
+	#pagenavi a{ font-size: 1.3em;}
+	#pagenavi .next:before{ top: 3px;}
+	#pagenavi .prev:before{ top: 3px;}
+	.container .mid-col .mid-col-container #content .archives .title{ font-size: 1.5em;}
+	.container .mid-col .mid-col-container #content article{ padding: 15px 0px;}
+	#header .subtitle {
+		line-height: 1.2em;
+		padding-top: 8px;
+	}
+	article pre{ background: none; border: none; padding: 0;}
+	article .entry-content{text-align: left;}
+	.share-comment{ padding: 25px 0px; clear: both;}
+	hr{ margin: 20px 0px;border: 0; border-top:solid 1px #ddd;}
+	</style>
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+				<header id="header" class="inner">
+				 
+				 	<div class="profilepic">
+						<img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" style="width:160px;">
+					</div>
+            	
+					
+					<h1><a href="index.html">kaelinda</a></h1>
+					<p class="subtitle">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</p>
+					<nav id="main-nav">
+						<ul class="main">
+						
+						  <li id=""><a target="_self" href="index.html">最近更新</a></li>
+						
+						  <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+						
+						  <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+						
+						  <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+						
+						  <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+						
+						  <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+						
+						  <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+						
+						  <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+						
+						  <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+						
+						  <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+						
+						</ul>
+					</nav>
+
+					<nav id="sub-nav">
+						<div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+
+								
+
+								<a class="rss" href="atom.xml" title="RSS">RSS</a>
+							
+						</div>
+					</nav>
+				</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div class="mid-col-container"> <div id="content" class="inner">
+
+	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<h1 class="title" itemprop="name">每天学习一个shell技能 （1）</h1>
+		<div class="entry-content" itemprop="articleBody">
+			<h2 id="toc_0">准备</h2>
+
+<p>bash 环境位置</p>
+
+<pre><code class="language-text">#!/bin/bash
+</code></pre>
+
+<p><code>#!</code> 一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell</p>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_1">运行shell</h2>
+
+<ol>
+<li><p>作为可执行程序</p>
+<pre><code class="language-shell">chmod +x ./mybash.sh
+./mybash.sh
+</code></pre></li>
+<li><p>作为解释器参数</p></li>
+</ol>
+
+<pre><code class="language-text">/bin/bash test.sh
+/bin/php test.php
+// 如果这样运行，文件内的第一行就可以不需要指定 解释器信息了
+</code></pre>
+
+<h2 id="toc_2">pwd</h2>
+
+<ol>
+<li><p>命令简介</p>
+<p><code>pwd</code> ：打印当前目录 ，命令以 <code>绝对路径</code> 的形式显示用户的  当前工作目录</p></li>
+<li><p>用法</p>
+<p><code>pwd    [-LP]</code></p></li>
+</ol>
+
+<h2 id="toc_3">变量</h2>
+
+<h3 id="toc_4">定义变量</h3>
+
+<ul>
+<li>定义变量时 不需要制定 <code>$</code>符号</li>
+<li>变量名和值、等号之间不能有空格</li>
+</ul>
+
+<p><strong>命名规范:</strong></p>
+
+<ul>
+<li>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头</li>
+<li>中间不能有空格，可以使用下划线（_）</li>
+<li>不能使用标点符号</li>
+<li>不能使用bash里的关键字（可用help命令查看保留关键字）</li>
+</ul>
+
+<pre><code class="language-shell">user_name=&#39;kael linda&#39;
+</code></pre>
+
+<h3 id="toc_5">使用变量</h3>
+
+<p>使用时，变量名前面加上<code>$</code>符号即可</p>
+
+<pre><code class="language-text">your_name=&quot;qinjx&quot;
+echo $your_name
+echo ${your_name}
+</code></pre>
+
+<p>花体括号 加不加都行，视情况而定。<br/>
+加是为了区分变量边界</p>
+
+<pre><code class="language-text">user_name=&quot;kaelinda&quot;
+echo  &quot;I&#39;m ${user_name}&#39; brother&quot;
+</code></pre>
+
+<h3 id="toc_6">只读变量</h3>
+
+<pre><code class="language-text">user_name=&quot;kaelinda&quot;
+readonly user_name
+user_name=&quot;kael&quot;
+</code></pre>
+
+<h3 id="toc_7">删除变量</h3>
+
+<pre><code class="language-text">unset variable_name
+</code></pre>
+
+<ul>
+<li>删除变量删除之后的变量不可再使用</li>
+<li>unset 命令不能删除只读变量</li>
+</ul>
+
+<h3 id="toc_8">变量类型</h3>
+
+<ul>
+<li>局部变量 局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。</li>
+<li>环境变量 所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。</li>
+<li>shell变量 shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行</li>
+</ul>
+
+<h2 id="toc_9">shell 字符串</h2>
+
+<h3 id="toc_10">单引号</h3>
+
+<pre><code class="language-text">str=&#39;this is a string&#39;
+</code></pre>
+
+<ul>
+<li>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的</li>
+<li>单引号字串中不能出现单引号（对单引号使用转义符后也不行）</li>
+</ul>
+
+<h3 id="toc_11">双引号</h3>
+
+<pre><code class="language-text">your_name=&#39;qinjx&#39;
+str=&quot;Hello, I know your are \&quot;$your_name\&quot;! \n&quot;
+</code></pre>
+
+<ul>
+<li>双引号里可以有变量</li>
+<li>双引号里可以出现转义字符</li>
+</ul>
+
+<h3 id="toc_12">拼接字符串</h3>
+
+<pre><code class="language-text">your_name=&quot;qinjx&quot;
+greeting=&quot;hello, &quot;$your_name&quot; !&quot;
+greeting_1=&quot;hello, ${your_name} !&quot;
+</code></pre>
+
+<h3 id="toc_13">获取字符串长度</h3>
+
+<pre><code class="language-text">string=&quot;abcd&quot;
+echo ${#string} #输出 4
+</code></pre>
+
+<h3 id="toc_14">提取字符串</h3>
+
+<pre><code class="language-text">string=&quot;runoob is a great site&quot;
+echo ${string:1:4} # 输出 unoo
+</code></pre>
+
+<h3 id="toc_15">查找字符串位置</h3>
+
+<pre><code class="language-text">string=&quot;runoob is a great company&quot;
+echo `expr index &quot;$string&quot; is`  # 输出 8
+</code></pre>
+
+<blockquote>
+<p>以上脚本中 &quot;`&quot; 是反引号，而不是单引号 &quot;&#39;&quot;，不要看错了.  这是用了正则表达式匹配字符</p>
+</blockquote>
+
+		</div>
+	</article>
+	<div class="share-comment">
+	 
+
+	  
+
+	  
+
+	</div>
+</div>        </div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a> &nbsp;&nbsp; 
+Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a>
+      </footer>
+		</div>
+	</div>
+
+  
+    
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+</body>
+</html>
